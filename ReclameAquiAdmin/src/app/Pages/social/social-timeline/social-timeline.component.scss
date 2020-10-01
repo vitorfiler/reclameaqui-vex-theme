@@ -1,0 +1,206 @@
+@media screen and (max-width: 600px) {
+    // .col-25, .col-75, input[type=submit], input[type=reset]{
+    //   width: 100%;
+    //   margin-top: 0;
+    // }
+    .size{
+        padding-left: 0%;
+        padding-top: 3%;
+        
+    }
+
+  }
+  .example-viewport-table {
+    height: 400px;
+    width: 900px;
+  }
+
+  @media screen and (min-width: 600px) {
+    .sizeEndereco{
+        margin-left: -25%;
+    }
+    .sizeDadosPessoais{
+      margin-left: -78%;
+    }
+
+  .card label {
+    font-weight: bolder;
+    font-size: medium;
+  }
+
+  
+    .size{
+      margin-left: -30%;
+  }
+
+  .sizeReclamacoes{
+    
+  }
+  
+  .sizeRating{
+    text-align: center;
+    margin-left: -38%;
+  }
+
+  }
+  .example-viewport {
+    height: 550px;
+    width: 360px;
+  }
+  .uploadfilecontainer {
+    background-image: url('../../../../assets/cloud-2044823_960_720.png');
+    background-repeat: no-repeat;
+    background-size: 100px;
+    background-position: center;
+    height: 200px;
+    width: 80%;
+    margin: 20px auto;
+    border: 2px dashed #1C8ADB;
+    border-radius: 10px;
+  }
+  
+  .uploadfilecontainer:hover {
+    cursor: pointer;
+    background-color: #9ecbec !important;
+    opacity: 0.8;
+  }
+  
+  .files-list {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin: 10px auto;
+    background: #ffffff;
+    border: 1px dashed;
+    border-radius: 12px;
+    padding: 5px;
+    color: #1c8adb;
+  }
+  
+  .files-list .delete-file {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .files-list .delete-file img {
+    width: 30px;
+  }
+  
+// https://codepen.io/jakealbaugh/pen/yedmRO
+// select the svg element
+$svg: '';
+// select the path
+$path: '';
+// for each radio
+@for $i from 1 through 10 {
+    // for each valid star
+    @for $x from 1 through $i {
+        // add checked input to selectors
+        $svg: $svg + '#cleanliness-stars-#{$i}:checked ~ ';
+        $path: $path + '#cleanliness-stars-#{$i}:checked ~ ';
+
+        // add svg or path element sib to selectors
+        // scope = section label svg [path]
+        $svg: $svg + "section [for='cleanliness-stars-#{$x}'] svg";
+        $path: $path + "section [for='cleanliness-stars-#{$x}'] svg path";
+
+        // if not the last, we add a comma
+        // @if $x != $i {
+        $svg: $svg + ', ';
+        $path: $path + ', ';
+        // }
+    }
+    // if not the last, we add the comma
+    // @if $i != 10 {
+    $svg: $svg + ', ';
+    $path: $path + ', ';
+    // }
+}
+
+@for $i from 1 through 10 {
+    @for $x from 1 through $i {
+        $svg: $svg + '#speed-stars-#{$i}:checked ~ ';
+        $path: $path + '#speed-stars-#{$i}:checked ~ ';
+        $svg: $svg + "section [for='speed-stars-#{$x}'] svg";
+        $path: $path + "section [for='speed-stars-#{$x}'] svg path";
+        // @if $x != $i {
+        $svg: $svg + ', ';
+        $path: $path + ', ';
+        // }
+    }
+    // @if $i != 10 {
+    $svg: $svg + ', ';
+    $path: $path + ', ';
+    // }
+}
+
+@for $i from 1 through 10 {
+    @for $x from 1 through $i {
+        $svg: $svg + '#host-#{$i}:checked ~ ';
+        $path: $path + '#host-#{$i}:checked ~ ';
+        $svg: $svg + "section [for='host-#{$x}'] svg";
+        $path: $path + "section [for='host-#{$x}'] svg path";
+        // @if $x != $i {
+        $svg: $svg + ', ';
+        $path: $path + ', ';
+        // }
+    }
+    // @if $i != 10 {
+    $svg: $svg + ', ';
+    $path: $path + ', ';
+    // }
+}
+
+// style the active svg
+// #spam-stars-1:checked ~ section [for='spam-stars-1'] svg
+#{$svg} {
+    transform: scale(1);
+}
+// style the active path
+#{$path} {
+    fill: #ffbb00;
+    stroke: darken(#ffbb00, 10%);
+}
+
+// hide the radio buttons
+input[type='radio'] {
+    display: none;
+}
+
+.files-list {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  margin: 10px auto;
+  background: #ffffff;
+  border: 1px dashed;
+  border-radius: 12px;
+  padding: 5px;
+  color: #1c8adb;
+}
+.files-list .delete-file {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.files-list .delete-file img {
+  width: 30px;
+}
+.labelRating {
+    align-items: flex-start;
+    // text-align: center;
+    cursor: pointer;
+    svg {
+        width: 30px;
+        height: auto;
+        fill: grey;
+        stroke: grey;
+        transform: scale(0.8);
+        transition: transform 200ms ease-in-out;
+        path {
+            transition: fill 200ms ease-in-out, stroke 100ms ease-in-out;
+        }
+    }
+}

@@ -1,0 +1,648 @@
+<div class="mt-6 flex flex-col md:flex-row md:items-start">
+  <div class="flex-auto">
+    
+
+    <div class="flex flex-col sm:flex-row">
+      
+      <div class="flex-1">
+         <!-- Menu -->
+         <cdk-virtual-scroll-viewport [itemSize]="18 * 7" class="example-viewport">
+  <div class="flex-none max-w-unset md:max-w-xs w-full md:ltr:ml-6 md:rtl:mr-6 mt-6 md:mt-0">
+    <div class="card">
+      <div class="px-gutter py-4 border-b">
+        <h2 class="title m-0">Opções</h2>
+      </div>
+
+      <div class="px-gutter py-3">
+        <div class="py-3" fxLayout="row" fxLayoutAlign="start center">
+          <div @scaleIn
+               class="w-10 h-10 rounded-full bg-primary-light text-primary ltr:mr-3 rtl:ml-3 flex items-center justify-center">
+            <ic-icon [icon]="bullhorn" size="20px"></ic-icon>
+          </div>
+
+          <div @fadeInRight>
+            <button @fadeInRight color="primary" [routerLink]="['/reclamar']" class="m-0 body-1 cursor-pointer">Nova Reclamação</button>
+          </div>
+        </div>
+
+        <!-- TOpico de menu -->
+        <div class="py-3" style="color: grey;" fxLayout="row" fxLayoutAlign="start center">
+
+          <div @fadeInRight>
+            <p  @fadeInRight color="primary" class="m-0 body-1">Minhas Reclamações</p>
+          </div>
+        </div>
+
+        <div class="py-3" fxLayout="row" fxLayoutAlign="start center">
+          <div @scaleIn
+               class="w-10 h-10 rounded-full bg-primary-light text-primary ltr:mr-3 rtl:ml-3 flex items-center justify-center">
+            <ic-icon [icon]="icWork" size="20px"></ic-icon>
+          </div>
+
+          <div @fadeInRight>
+            <button (click)="todasReclamacoes('0')" @fadeInRight class="m-0 body-1 cursor-pointer">Todas</button>
+          </div>
+        </div>
+
+        <div class="py-3" fxLayout="row" fxLayoutAlign="start center">
+          <div @scaleIn
+               class="w-10 h-10 rounded-full bg-primary-light text-primary ltr:mr-3 rtl:ml-3 flex items-center justify-center">
+            <ic-icon [icon]="icWork" size="20px"></ic-icon>
+          </div>
+
+          <div @fadeInRight>
+            <button (click)="reclamacoesIniciadas('2')" @fadeInRight class="m-0 body-1 cursor-pointer">Iniciadas</button>
+          </div>
+        </div>
+
+        <div class="py-3" fxLayout="row" fxLayoutAlign="start center">
+          <div @scaleIn
+               class="w-10 h-10 rounded-full bg-primary-light text-primary ltr:mr-3 rtl:ml-3 flex items-center justify-center">
+            <ic-icon [icon]="message" size="20px"></ic-icon>
+          </div>
+
+          <div @fadeInRight>
+            <button (click)="reclamacoesRespondidas('4')" @fadeInRight class="m-0 body-1 cursor-pointer">Respondidas</button>
+          </div>
+        </div>
+
+        <div class="py-3" fxLayout="row" fxLayoutAlign="start center">
+          <div @scaleIn
+               class="w-10 h-10 rounded-full bg-primary-light text-primary ltr:mr-3 rtl:ml-3 flex items-center justify-center">
+            <ic-icon [icon]="icAccessTime" size="20px"></ic-icon>
+          </div>
+
+          <div @fadeInRight>
+            <button @fadeInRight (click)="reclamacoesNaoRespondidas('1')" class="m-0 body-1 cursor-pointer">Não Respondidas</button>
+          </div>
+        </div>
+
+        <div class="py-3" fxLayout="row" fxLayoutAlign="start center">
+          <div @scaleIn
+               class="w-10 h-10 rounded-full bg-gray-light text-dark ltr:mr-3 rtl:ml-3 cursor-pointer flex items-center justify-center">
+            <ic-icon [icon]="icCheck" size="20px"></ic-icon>
+          </div>
+
+          <button @fadeInRight (click)="reclamacoesAvaliadas('5')" class="m-0 body-1 cursor-pointer">Avaliadas</button>
+        </div>
+
+        <div class="py-3" fxLayout="row" fxLayoutAlign="start center">
+          <div @scaleIn
+               class="w-10 h-10 rounded-full bg-gray-light text-dark ltr:mr-3 rtl:ml-3 cursor-pointer flex items-center justify-center">
+            <ic-icon [icon]="block" size="20px"></ic-icon>
+          </div>
+
+          <button @fadeInRight (click)="reclamacoesDesativadas('6')" class="m-0 body-1 cursor-pointer">Desativadas</button>
+        </div>
+
+        <!-- TOpico de menu -->
+        <div class="py-3" style="color: grey;" fxLayout="row" fxLayoutAlign="start center">
+
+          <div @fadeInRight>
+            <p  @fadeInRight color="primary" class="m-0 body-1">Configurações</p>
+          </div>
+        </div>
+
+        <div class="py-3" fxLayout="row" fxLayoutAlign="start center">
+          <div @scaleIn
+               class="w-10 h-10 rounded-full bg-primary-light text-primary ltr:mr-3 rtl:ml-3 flex items-center justify-center">
+            <ic-icon [icon]="acBalance" size="20px"></ic-icon>
+          </div>
+
+          <div @fadeInRight>
+            <button (click)="dadosPessoais()" @fadeInRight class="m-0 body-1 cursor-pointer">Dados Pessoais</button>
+          </div>
+        </div>
+
+        <div class="py-3" fxLayout="row" fxLayoutAlign="start center">
+          <div @scaleIn
+               class="w-10 h-10 rounded-full bg-primary-light text-primary ltr:mr-3 rtl:ml-3 flex items-center justify-center">
+            <ic-icon [icon]="key" size="20px"></ic-icon>
+          </div>
+
+          <div @fadeInRight>
+            <button (click)="formTrocarSenha()" @fadeInRight class="m-0 body-1 cursor-pointer">Trocar Senha</button>
+          </div>
+        </div>
+
+        <div class="py-3" fxLayout="row" fxLayoutAlign="start center">
+          <div @scaleIn
+               class="w-10 h-10 rounded-full bg-primary-light text-primary ltr:mr-3 rtl:ml-3 flex items-center justify-center">
+            <ic-icon [icon]="icMail" size="20px"></ic-icon>
+          </div>
+
+          <div @fadeInRight>
+            <button (click)="formTrocarEmail()" @fadeInRight class="m-0 body-1 cursor-pointer">Trocar Email</button>
+          </div>
+        </div>
+
+        <div class="py-3" fxLayout="row" fxLayoutAlign="start center">
+          <div @scaleIn
+               class="w-10 h-10 rounded-full bg-gray-light text-dark ltr:mr-3 rtl:ml-3 cursor-pointer flex items-center justify-center">
+            <ic-icon [icon]="power" size="20px"></ic-icon>
+          </div>
+
+          <button (click)="logout()" @fadeInRight class="m-0 body-1 cursor-pointer">Sair</button>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</cdk-virtual-scroll-viewport>
+  <!-- Menu -->
+</div>
+<!-- Rating Reclamação -->
+<div style="margin-bottom: 15%;"  *ngIf="rating" class="flex-1  sm:ltr:ml-4 sm:rtl:mr-4 sizeRating"> 
+  <div  >
+    <!--Card -->
+    <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px">
+      <div @fadeInUp class="card" fxFlex="auto">
+        <form [formGroup]="form" (keydown.enter)="$event.preventDefault()">
+          <ul class="review__ratings" formGroupName="ratings">
+            <li class="review__rating" *ngFor="let subject of ratingSubjects; index as subjectIndex">
+              <ng-container *ngFor="let radio of [0,1,2,3,4,5,6,7,8,9,10] index as i">
+                  <input [(ngModel)]="ratingValue"  type="radio" required [name]="subject.name" [id]="[subject.name + '-stars-' + i]" [formControlName]="subject.name" [value]="[radio]" />
+              </ng-container>
+        
+              <section class="review__stars">
+                  <h3 style="padding-top: 2%;">Como você avalia o atendimento dessa empresa?</h3>
+                  <ng-container *ngFor="let star of [0,1,2,3,4,5,6,7,8,9,10]; index as i">
+                      <label class="labelRating" [ngClass]="{'review__rating__clear': i === 0}" [for]="[subject.name + '-stars-' + i]">
+                          <span style="padding-top: 450px;" *ngIf="i === 0">Limpar</span>
+                          <svg *ngIf="i !== 0" class="review__star" width="255" height="240" viewBox="0 0 51 48">
+                            <path d="m25,1 6,17h18l-14,11 5,17-15-10-15,10 5-17-14-11h18z" />
+                          </svg>
+                      </label>
+                    </ng-container>
+                    <button  (click)="notaRating()"
+                            color="primary" 
+                            [disabled]="form.invalid"
+                            mat-raised-button 
+                            type="button">Próximo</button>
+              </section>
+            </li>
+          </ul>
+        
+        </form>
+      </div>
+    </div>
+    <!-- End Card -->
+  </div>
+</div>
+<!-- Rating reclamação fim -->
+<!-- Rating Reclamação -->
+<div *ngIf="notaSolucao" class="flex-1  sm:ltr:ml-4 sm:rtl:mr-4 sizeRating"> 
+  <div  >
+    <!--Card -->
+    <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px">
+      <div @fadeInUp class="card" fxFlex="auto">
+        <form [formGroup]="form" (keydown.enter)="$event.preventDefault()">
+          <ul class="review__ratings" formGroupName="ratings">
+            <li class="review__rating" *ngFor="let subject of ratingSubjects; index as subjectIndex">
+              <ng-container *ngFor="let radio of [0,1,2,3,4,5,6,7,8,9,10] index as i">
+                  <input [(ngModel)]="notaSolucaoValue"  type="radio" required [name]="subject.name" [id]="[subject.name + '-stars-' + i]" [formControlName]="subject.name" [value]="[radio]" />
+              </ng-container>
+        
+              <section class="review__stars">
+                  <h3 style="padding-top: 2%;">Como você avalia a solução apresentada pela empresa na sua Reclamação</h3>
+                  <ng-container *ngFor="let star of [0,1,2,3,4,5,6,7,8,9,10]; index as i">
+                      <label class="labelRating" [ngClass]="{'review__rating__clear': i === 0}" [for]="[subject.name + '-stars-' + i]">
+                          <span style="padding-top: 450px;" *ngIf="i === 0">Limpar</span>
+                          <svg *ngIf="i !== 0" class="review__star" width="255" height="240" viewBox="0 0 51 48">
+                            <path d="m25,1 6,17h18l-14,11 5,17-15-10-15,10 5-17-14-11h18z" />
+                          </svg>
+                      </label>
+                    </ng-container>
+              </section>
+            </li>
+          </ul>
+        
+        </form>
+      </div>
+    </div>
+    <!-- End Card -->
+        <!--Card -->
+        <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px">
+          <div @fadeInUp class="card" fxFlex="auto">
+            <form [formGroup]="formNegocio">
+              <h3 style="padding-top: 2%;">Você voltaria fazer negócios com esta empresa</h3>
+              <mat-radio-group style="margin-top: 4%;" formControlName="negocios" [(ngModel)]="flagVoltarFazerNegocio" aria-label="Select an option">
+                <mat-radio-button style="padding-right: 15px;" value="true">Sim</mat-radio-button>
+                <mat-radio-button value="false">Não</mat-radio-button>
+              </mat-radio-group>
+            </form>
+            <button  (click)="notaRatingSolucao()"
+                    color="primary" 
+                    [disabled]="form.invalid || formNegocio.invalid"
+                    mat-raised-button 
+                    type="button"
+                    style="margin-top: 4%;">Avaliar</button>
+          </div>
+        </div>
+        <!-- End Card -->
+  </div>
+</div>
+<!-- Rating reclamação fim -->
+<div class="flex-1 size sm:ltr:ml-4 sm:rtl:mr-4" *ngIf="flagReclamacoes">
+  <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px">
+    <div @fadeInUp class="card" fxFlex="auto">
+      <div class="px-6 py-4 border-b" fxLayout="row" fxLayoutAlign="start center">
+        <h2 class="title m-0">{{tituloReclamacoes}}</h2>
+      </div>
+      <cdk-virtual-scroll-viewport [itemSize]="18 * 7" class="example-viewport-table">
+      <table id="reclamacoes" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+              <ng-container matColumnDef="Expandir">
+                <th class="colum" mat-header-cell *matHeaderCellDef>
+                  Expandir
+              </th>
+                <mat-cell style="padding-left: 28%"*matCellDef="let table" >
+                  <div @scaleIn class="w-10 h-10 rounded-full bg-primary-light text-primary ltr:mr-3 rtl:ml-3 flex items-center justify-center">
+                    <ic-icon (click)="expandirReclamacao(table.Id)" style="cursor: pointer;" [icon]="expand" size="20px"></ic-icon>
+                  </div>
+                </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="Status">
+                  <th mat-header-cell *matHeaderCellDef class="colum">
+                      Status
+                  </th>
+                  <td class="colum" mat-cell *matCellDef="let table">{{table.Id}} {{table.Status}}</td>
+              </ng-container>
+  
+              <ng-container matColumnDef="Data" >
+                  <th class="colum" mat-header-cell *matHeaderCellDef>
+                      Data
+                  </th>
+                  <td class="colum" mat-cell *matCellDef="let table">
+                      {{table.DataAbertura}}
+                  </td>
+              </ng-container>
+  
+              <ng-container matColumnDef="Empresa" >
+                  <th class="colum" mat-header-cell *matHeaderCellDef>
+                      Empresa
+                  </th>
+                  <td class="colum" mat-cell *matCellDef="let table">{{table.Empresa}}</td>
+              </ng-container>
+              
+              <!-- <ng-container matColumnDef="Download">
+                <th class="colum" mat-header-cell *matHeaderCellDef>
+                  Arquivos
+              </th>
+                <mat-cell *matCellDef="let table" >
+                  <div  @scaleIn class="w-10 h-10 rounded-full bg-primary-light text-primary ltr:mr-3 rtl:ml-3 flex items-center justify-center">
+                    <a [href]="fileUrl" download="file.txt"><img *ngIf="temArquivos(table.Id)" href="fileUrl" download="file.txt" style="cursor: pointer; max-width: 25px;" src="../../../assets/download.png"></a>
+                   
+                  </div>
+                  
+                  <div *ngIf="!temArquivos(table.Id)" @scaleIn class="w-10 h-10 rounded-full bg-primary-light text-primary ltr:mr-3 rtl:ml-3 flex items-center justify-center">
+                    -
+                  </div>
+                </mat-cell>
+              </ng-container> -->
+
+              <ng-container matColumnDef="Reclamacao">
+                <th class="colum" mat-header-cell *matHeaderCellDef>
+                  Reclamação
+                </th>
+                <td class="colum" mat-cell *matCellDef="let table">{{table.Titulo}}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="Cancelar">
+                <th class="colum" mat-header-cell *matHeaderCellDef>
+                  Cancelar
+              </th>
+                <mat-cell *matCellDef="let table" >
+                  <div *ngIf="getBotaoStatus(table.StatusId)" @scaleIn class="w-10 h-10 rounded-full bg-primary-light text-primary ltr:mr-3 rtl:ml-3 flex items-center justify-center">
+                    <img (click)="excluirReclamacao(table.Id, table.Empresa)" style="cursor: pointer; max-width: 25px;" src="../../../assets/Recycle_Bin_Full.png">
+                  </div>
+                  
+                  <div *ngIf="!getBotaoStatus(table.StatusId)" @scaleIn class="w-10 h-10 rounded-full bg-primary-light text-primary ltr:mr-3 rtl:ml-3 flex items-center justify-center">
+                    -
+                  </div>
+                </mat-cell>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+          </table><!--  -->
+        </cdk-virtual-scroll-viewport>
+          </div>
+        </div>
+      </div>
+
+
+
+          <!-- Resposta Reclamação -->
+          <div *ngIf="flagExpandirReclamacao">
+            <div  class="flex-1 sizeReclamacoes sm:ltr:ml-4 sm:rtl:mr-4" >
+              <!--Card -->
+              <div fxLayout="row" style="padding-bottom: 3%;" fxLayout.lt-md="column" fxLayoutGap="20px">
+                <div @fadeInUp class="card" fxFlex="auto">
+                  <div style="padding-left: 2%; cursor: pointer;" class="py-3" fxLayout="row" fxLayoutAlign="start center">
+                    <div @scaleIn class="w-10 h-10 rounded-full bg-primary-light text-primary ltr:mr-3 rtl:ml-3 flex items-center justify-center">
+                      <img src="{{urlFoto}}" style="max-width: 25px;">
+                    </div>
+
+                    <div @fadeInRight>
+                      <button @fadeInRight color="primary" class="m-0 body-1 cursor-pointer">{{reclamacaoFiltrada.NomeReclamante}}</button>
+                    </div>
+                  </div>
+            
+                  <div class="px-6 py-4" fxLayout="column">
+                    <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
+                      <label fxFlex="auto"><b>{{reclamacaoFiltrada.Titulo}}</b></label>
+                    </div>
+                    <div style="padding-top: 2% ;" fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
+                      <h3 @fadeInUp class="subheading-2  text-left  mx-auto m-2">{{reclamacaoFiltrada.Body}}</h3> 
+                    </div>
+                    <h3 @fadeInUp style="color: white;" class="subheading-2  text-left  mx-auto m-2">1111111111111 1111111111111111111111111111111111111111111111</h3> 
+                    
+                      <div class="files-list" *ngFor="let item of reclamacaoFiltrada.Arquivos; let i=index">
+                        <p>{{reclamacaoFiltrada.NomeArquivos[i]}}</p>
+                        <button class="delete-file">
+                          <a href="../../../{{item}}" download="{{reclamacaoFiltrada.NomeArquivos[i]}}">
+                            <img src="../../../assets/download.png">
+                          </a>
+                        </button>
+                      </div>
+                      <h3>
+                        <span style="margin-right: 7%;" class="badge badge-danger">{{reclamacaoFiltrada.DsStatus}}</span>
+                        <i style="font-size: small;"> {{reclamacaoFiltrada.TempoDecorrido}} </i> 
+                      </h3>
+                      
+                  </div>
+                  <!-- Respostas -->
+                  <div *ngIf="reclamacaoFiltrada.StatusId != 1">
+                  <div class="px-6 py-4" fxLayout="column" *ngFor="let resposta of respostas">
+                    <div style="padding-left: 2%; cursor: pointer;" class="py-3" fxLayout="row" fxLayoutAlign="start center">
+                      <div @scaleIn class="w-10 h-10 rounded-full bg-primary-light text-primary ltr:mr-3 rtl:ml-3 flex items-center justify-center">
+                        <img src="{{resposta.fotoPerfil}}" style="max-width: 25px;">
+                      </div>
+
+                      <div @fadeInRight>
+                        <button @fadeInRight color="primary" class="m-0 body-1 cursor-pointer">{{resposta.nomePerfil}}</button>
+                      </div>
+                      <h3 @fadeInUp class="subheading-1  text-left  mx-auto m-2">{{resposta.horaResposta}}</h3> 
+                    </div>
+
+                      <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
+                        <h3 @fadeInUp class="subheading-2  text-left m-2">{{resposta.textoResposta}}</h3> 
+                      </div>
+                      <div class="files-list" *ngFor="let item of resposta.Arquivos;let i=index">
+                        <p>{{resposta.NomeArquivos[i]}}</p>
+                        <button class="delete-file">
+                          <a href="../../../{{item}}" download="{{resposta.NomeArquivos[i]}}">
+                            <img src="../../../assets/download.png">
+                          </a>
+                        </button>
+                      </div>
+                  </div>
+
+                  </div>
+                  <!-- Fim Respostas -->
+                </div>
+              </div>
+              <!-- End Card -->
+            </div>
+          </div>
+          <!-- Resposta reclamação fim -->
+
+          <!-- formulario de resposta -->
+          <div class="flex-1" *ngIf="flagExpandirReclamacao">
+            <cdk-virtual-scroll-viewport [itemSize]="18 * 7" class="example-viewport">
+              <div style="padding-bottom: 3%;" class="flex-none max-w-unset md:max-w-xs w-full md:ltr:ml-6 md:rtl:mr-6 mt-6 md:mt-0">
+                <div @fadeInUp class="card" fxFlex="auto">
+                  <div class="px-6 py-4 border-b" fxLayout="row" fxLayoutAlign="start center">
+                    <h2 class="title m-0">Enviar uma mensagem</h2>
+                  </div>
+            
+                  <div [formGroup]="formReclamacao" class="px-6 py-4" fxLayout="column">
+                    <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
+                      <mat-form-field fxFlex>
+                        <mat-label>Sua Mensagem</mat-label>
+                        <textarea formControlName="resposta" [(ngModel)]="conteudoResposta.conteudo" matInput matTextareaAutosize required ></textarea>
+                      </mat-form-field>
+
+                    </div>
+                    <div style="text-align: center;">Clique e selecione seus Arquivos:</div>
+                    <div class="uploadfilecontainer" (click)="fileInput.click()" appDragDrop (onFileDropped)="uploadFile($event)">
+                      <input hidden type="file" #fileInput (change)="uploadFile($event.target.files)">
+                    </div>
+                      <div  class="files-list" *ngFor="let file of files;let i=index">
+                        <p>{{ file }}</p>
+                        <button class="delete-file" (click)="deleteAttachment(i)">
+                          <img src="../../../assets/Recycle_Bin_Full.png">
+                        </button>
+                      </div>
+            
+                    <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="8px">
+                    <button class="btn btn-warning" (click)="finalizarReclamacao(reclamacaoFiltrada.IdReclamacao)">Finalizar</button>
+                    <button [disabled]="formReclamacao.invalid" (click)="dadosReclamacaoSubmit()" color="primary" mat-raised-button type="button">Enviar</button>
+                    <!-- <button type="reset" (click)="cancelar()" class="btn btn-secondary">cancelar</button> -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </cdk-virtual-scroll-viewport>
+          </div>
+          <!-- formulario de resposta -->
+
+
+
+      <!-- Trocar Email -->
+      <div [formGroup]="formEmail" class="flex-1 size sm:ltr:ml-4 sm:rtl:mr-4" *ngIf="flagTrocarEmail">
+        <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px">
+          <div @fadeInUp class="card" fxFlex="auto">
+            <div class="px-6 py-4 border-b" fxLayout="row" fxLayoutAlign="start center">
+              <h2 class="title m-0">Trocar Email</h2>
+            </div>
+      
+            <div class="px-6 py-4" fxLayout="column">
+              <label>Seu email atual é: <b>{{cliente.email}}</b></label>
+              <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
+                <mat-form-field fxFlex="auto">
+                  <mat-label>Novo email</mat-label>
+                  <input [(ngModel)]="trocar.email" formControlName="novoEmail" matInput required>
+                </mat-form-field>
+                <mat-form-field fxFlex="auto">
+                  <mat-label>Confirme o Email</mat-label>
+                  <input formControlName="confirmarEmail" matInput required>
+                </mat-form-field>
+              </div>
+              <mat-form-field>
+                <mat-label>Digite sua senha</mat-label>
+                <input formControlName="senhaTrocaEmail" type="password" matInput required>
+              </mat-form-field>
+              <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="8px">
+                <button type="reset" (click)="dadosPessoais()" color="warn" mat-raised-button type="button">Cancelar</button>
+                <button color="primary" mat-raised-button type="button" (click)="trocarEmail(trocar.email)" [disabled]="formEmail.invalid">alterar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Trocar Senha -->
+      <div [formGroup]="formSenha" class="flex-1 size sm:ltr:ml-4 sm:rtl:mr-4" *ngIf="flagTrocarSenha">
+        <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px">
+          <div @fadeInUp class="card" fxFlex="auto">
+            <div class="px-6 py-4 border-b" fxLayout="row" fxLayoutAlign="start center">
+              <h2 class="title m-0">Trocar Senha</h2>
+            </div>
+            <div class="px-6 py-4" fxLayout="column">
+              <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
+                <mat-form-field fxFlex="auto">
+                  <mat-label>Nova senha</mat-label>
+                  <input formControlName="password" type="password" matInput>
+                </mat-form-field>
+                <mat-form-field fxFlex="auto">
+                  <mat-label>Confirmar senha</mat-label>
+                  <input [(ngModel)]="trocar.senha" formControlName="passwordConfirm" type="password" matInput required>
+                </mat-form-field>
+              </div>
+              <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="8px">
+                <button type="reset" (click)="dadosPessoais()" color="warn" mat-raised-button type="button">Cancelar</button>
+                <button color="primary" mat-raised-button type="button" (click)="trocarSenha(trocar.senha)" [disabled]="formSenha.invalid" >alterar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Dados pessoais -->
+      <div>
+      <div  class="flex-1 sizeDadosPessoais sm:ltr:ml-4 sm:rtl:mr-4" *ngIf="flagDadosPessoais">
+        <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px">
+          <div @fadeInUp style="text-align: left;" class="card" fxFlex="auto">
+            <div class="px-6 py-4 border-b" fxLayout="row" fxLayoutAlign="start center">
+              <h2 class="title m-0">Dados Pessoais</h2>
+            </div>
+      
+            <div class="px-6 py-6" fxLayout="column">
+              <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
+                <ul>
+                  <li><label fxFlex="auto">Nome: {{cliente.nome}}</label></li>
+                  <li><label fxFlex="auto">CPF: {{cliente.cpf}}</label></li>
+                  <li><label fxFlex="auto">Senha: *********  <a style="font-size: x-small; cursor: pointer; padding-left: 5px; color: blue;" (click)="formTrocarSenha()"><b>editar</b></a></label></li>
+                  <li><label fxFlex="auto" >Email: {{cliente.email}} <a style="font-size: x-small; cursor: pointer; padding-left: 5px; color: blue;" (click)="formTrocarEmail()"><b>editar</b></a></label></li>
+                  <li><label fxFlex="auto" >Celular: {{cliente.celular}}</label></li>
+                  <li><label fxFlex="auto" >Data de Nascimento: {{cliente.dataNascimento}}</label></li>
+                </ul>
+              </div>
+
+              <div style="padding-top: 2%;" fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
+                <ul>
+                
+              </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Trocar Endereço -->
+      <div style="padding-top: 3%;" class="flex-1 sizeDadosPessoais sm:ltr:ml-4 sm:rtl:mr-4" *ngIf="flagDadosPessoais && !temEndereco">
+        <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px">
+          <div @fadeInUp class="card" fxFlex="auto">
+            <div class="px-6 py-4 border-b" fxLayout="row" fxLayoutAlign="start center">
+              <h2 class="title m-0">Endereço</h2>
+            </div>
+      
+            <div [formGroup]="formEndereco" class="px-6 py-4" fxLayout="column">
+              <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
+                <mat-form-field fxFlex="auto">
+                  <mat-label>Logradouro</mat-label>
+                  <input formControlName="logradouro" [(ngModel)]="clienteAlterado.logradouro" matInput required>
+                </mat-form-field>
+                <mat-form-field fxFlex="auto">
+                  <mat-label>Número</mat-label>
+                  <input formControlName="numero" [(ngModel)]="clienteAlterado.numero" matInput required>
+                </mat-form-field>
+              </div>
+              <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
+                <mat-form-field fxFlex="auto">
+                  <mat-label>Complemento</mat-label>
+                  <input formControlName="complemento" [(ngModel)]="clienteAlterado.complemento" matInput required>
+                </mat-form-field>
+                <mat-form-field fxFlex="auto">
+                  <mat-label>Bairro</mat-label>
+                  <input formControlName="bairro" [(ngModel)]="clienteAlterado.bairro" matInput required>
+                </mat-form-field>
+              </div>
+              <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
+                <mat-form-field fxFlex="auto">
+                  <mat-label>Cidade</mat-label>
+                  <input formControlName="cidade" [(ngModel)]="clienteAlterado.cidade" matInput required>
+                </mat-form-field>
+                <mat-form-field fxFlex="auto">
+                  <mat-label>Uf</mat-label>
+                  <input formControlName="uf" [(ngModel)]="clienteAlterado.uf" matInput required>
+                </mat-form-field>
+                
+              </div>
+              <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
+                <mat-form-field fxFlex="auto">
+                  <mat-label>Cep</mat-label>
+                  <input formControlName="cep" [(ngModel)]="clienteAlterado.cep" matInput required>
+                </mat-form-field>
+                <mat-form-field fxFlex="auto">
+                  <mat-label>Celular</mat-label>
+                  <input formControlName="celular" id="celular" name="celular" [mask]="mascaraCelular()" [(ngModel)]="clienteAlterado.celular" matInput required>
+                </mat-form-field>
+              </div>
+      
+              <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="8px">
+              <button type="reset" (click)="temEndereco = false" color="warn" mat-raised-button type="button">Cancelar</button>
+              <button [disabled]="formEndereco.invalid" (click)="alterarDadosPessoais(clienteAlterado.logradouro,
+                                                                      clienteAlterado.numero,
+                                                                      clienteAlterado.complemento,
+                                                                      clienteAlterado.bairro,
+                                                                      clienteAlterado.cidade,
+                                                                      clienteAlterado.uf,
+                                                                      clienteAlterado.cep,
+                                                                      clienteAlterado.celular)"  color="primary" mat-raised-button type="button">Alterar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Trocar endereço fim -->
+      <!-- Ver endereço -->
+      <div style="padding-top: 3%;" class="flex-1 sizeDadosPessoais sm:ltr:ml-4 sm:rtl:mr-4" *ngIf="flagDadosPessoais && temEndereco">
+        <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px">
+          <div @fadeInUp class="card" fxFlex="auto">
+            <div class="px-6 py-4 border-b" fxLayout="row" fxLayoutAlign="start center">
+              <h2 class="title m-0">Endereço</h2>
+            </div>
+      
+            <div class="px-6 py-4" fxLayout="column">
+               
+                <div style="padding-left: 0px;" fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
+                  <ul>
+                      <li><label fxFlex="auto">Logradouro: {{cliente.logradouro}}</label></li>
+                      <li><label fxFlex="auto">Complemento: {{cliente.complemento}} </label></li>
+                      <li><label fxFlex="auto">Número: {{cliente.uf}}</label></li>
+                      <li><label fxFlex="auto">Bairro: {{cliente.bairro}}</label></li>
+                      <li><label fxFlex="auto">Cidade: {{cliente.cidade}}</label></li>
+                      <li><label fxFlex="auto">UF: {{cliente.uf}}</label></li>
+                      <li><label fxFlex="auto">Cep: {{cliente.cep}}</label></li>
+                      <li><label fxFlex="auto">Celular: {{cliente.celular}}</label></li>
+                  </ul>
+                </div>
+              
+      
+              <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="8px">
+                <input type="reset" value="Editar" class="btn btn-primary" (click)="temEndereco = false" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- ver endereço fim -->
+    </div>
+    </div>
+  </div>
+
+
+ 
+</div>

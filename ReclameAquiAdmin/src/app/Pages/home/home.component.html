@@ -1,0 +1,55 @@
+<div class="text-center py-24 header">
+  <div class="container">
+    <h2 @fadeInUp class="display-2 mt-16 mb-8">Reclame aqui Nova Lima</h2>
+    <div @fadeInUp 
+         class="border rounded-full bg-card py-2 pl-6 pr-3 text-secondary max-w-xl mx-auto shadow-8"
+         fxLayout="row" 
+         fxLayoutAlign="start center"
+         matAutocompleteOrigin 
+         #origin="matAutocompleteOrigin"
+         [formGroup]="formSelectEmp">
+
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="empresaSubmit()">
+          <mat-option *ngFor="let emp of filteredOptions | async" [value]="emp.id">{{emp.nome}}</mat-option>
+        </mat-autocomplete>
+      <ic-icon [icon]="icSearch" fxFlex="none" size="24px"></ic-icon>
+      <input class="border-0 ml-4 placeholder:text-secondary subheading-2 outline-none font-medium w-0 bg-card"
+             fxFlex="auto" placeholder="Antes de comprar pesquise a reputação da Empresa" type="text"
+             formControlName="selectEmp"
+             [formControl] = "myControl" 
+             [matAutocomplete] = "auto"
+             [matAutocompleteConnectedTo]="origin"
+             matInput
+             [(ngModel)]="reclamacaoSave.EmpresaId">
+      <button class="rounded-full" color="primary" fxFlex="none" mat-raised-button type="button">Buscar</button>
+    </div>
+    
+
+    <div @stagger
+         class="mt-24 -mb-16 mx-auto"
+         fxLayout="row"
+         fxLayout.xs="column"
+         fxLayoutGap="24px"
+         fxLayoutGap.xs="16px">
+      <a #rla="routerLinkActive"
+         *ngFor="let link of links; trackBy: trackByRoute"
+         @fadeInUp
+         [class.border-primary]="rla.isActive"
+         [routerLink]="link.route"
+         class="card block text-center p-6 hover:bg-app-bar trans-ease-out cursor-pointer relative no-underline text-dark border-2"
+         fxFlex
+         fxFlex.xs="auto"
+         fxLayout="column"
+         fxLayoutAlign="center center"
+         matRipple
+         routerLinkActive>
+        <!-- <ic-icon [class.text-primary]="rla.isActive" [icon]="link.icon" class="text-hint" size="42px"></ic-icon> -->
+        <h3 class="title mb-0 mt-4">{{ link.label }}</h3>
+      </a>
+    </div>
+
+
+<router-outlet></router-outlet>
+
+</div>
+</div>

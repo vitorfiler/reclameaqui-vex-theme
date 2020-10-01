@@ -1,0 +1,119 @@
+<div class="mt-6 flex flex-col md:flex-row md:items-start">
+  <div class="flex-auto">
+    
+
+    <div class="flex flex-col sm:flex-row">
+      
+<!-- Menu -->
+<div class="flex-1">
+<cdk-virtual-scroll-viewport [itemSize]="18 * 7" class="example-viewport">
+  <div class="flex-none max-w-unset md:max-w-xs w-full md:ltr:ml-6 md:rtl:mr-6 mt-6 md:mt-0">
+    <div class="card">
+      <div class="px-gutter py-4 border-b">
+        <h2 class="title m-0">Mais resolveram nos últimos 30 dias</h2>
+      </div>
+
+      <div class="px-gutter py-3" *ngFor="let item of ranking1">
+        <div class="py-3" fxLayout="row" fxLayoutAlign="start center">
+          <div @scaleIn class="w-10 h-10 rounded-full bg-primary-light text-primary ltr:mr-3 rtl:ml-3 flex items-center justify-center">
+            <!-- <ic-icon [icon]="bullhorn" size="20px"></ic-icon> -->
+            <img src="{{item.Foto}}" style="max-width: 25px;">
+          </div>
+
+          <div @fadeInRight>
+            <button @fadeInRight class="m-0 body-1 cursor-pointer">{{item.NomeEmpresa}}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </cdk-virtual-scroll-viewport>
+</div>
+<!-- Menu -->
+
+      <div>
+      <div  class="flex-1 sizeEndereco sm:ltr:ml-4 sm:rtl:mr-4" *ngIf="flagDadosPessoais && !vazio">
+        <!-- End Card -->
+        <div fxLayout="row" *ngFor="let item of preencheTable" style="padding-bottom: 3%;" fxLayout.lt-md="column" fxLayoutGap="20px">
+          <div @fadeInUp class="card" fxFlex="auto">
+            <div style="padding-left: 2%; cursor: pointer;" class="py-3" fxLayout="row" fxLayoutAlign="start center">
+              <div @scaleIn class="w-10 h-10 rounded-full bg-primary-light text-primary ltr:mr-3 rtl:ml-3 flex items-center justify-center">
+                <img src="{{item.Foto}}" style="max-width: 25px;">
+              </div>
+
+              <div @fadeInRight>
+                <button @fadeInRight color="primary" class="m-0 body-1 cursor-pointer">{{item.NomeReclamante}}</button>
+              </div>
+            </div>
+      
+            <div class="px-6 py-4" fxLayout="column">
+              <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
+                <label fxFlex="auto"><b>{{item.Titulo}}</b></label>
+              </div>
+
+                <div style="padding-top: 2% ;" fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
+                  <h3 @fadeInUp fxFlex="auto" class="subheading-2  m-2">{{item.Body}}</h3> 
+                </div >
+                <h3 @fadeInUp style="color: white;" class="subheading-2  text-left  mx-auto m-2">1111111111111 1111111111111111111111111111111111111111111111</h3> 
+                
+                <h3><span class="{{item.StatusCor}}">{{item.DsStatus}} </span> <i style="font-size: small;"> {{item.TempoDecorrido}}</i></h3>
+                
+            </div>
+          </div>
+        </div>
+        <!-- End Card -->
+      </div>
+    </div>
+
+    <div>
+      <div  class="flex-1 sizeEndereco sm:ltr:ml-4 sm:rtl:mr-4" *ngIf="vazio">
+        <!-- End Card -->
+        <div fxLayout="row" style="padding-bottom: 3%;" fxLayout.lt-md="column" fxLayoutGap="20px">
+          <div @fadeInUp class="card" fxFlex="auto">
+      
+            <div class="px-6 py-4" fxLayout="column">
+              <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
+                <label fxFlex="auto"><b>Esta empresa não possui reclamações</b></label>
+              </div>
+                <h3 @fadeInUp style="color: white;" class="subheading-2  text-left  mx-auto m-2">1111111111111 1111111111111111111111111111111111111111111111</h3> 
+                
+            </div>
+          </div>
+        </div>
+        <!-- End Card -->
+      </div>
+    </div>
+
+    <!-- Menu -->
+    <div class="flex-1">
+      <cdk-virtual-scroll-viewport [itemSize]="18 * 7" class="example-viewport">
+        <div class="flex-none max-w-unset md:max-w-xs w-full md:ltr:ml-6 md:rtl:mr-6 mt-6 md:mt-0">
+          <div class="card">
+            <div class="px-gutter py-4 border-b">
+              <h2 class="title m-0">Piores empresas nos últimos 30 dias</h2>
+            </div>
+  
+            <div class="px-gutter py-3" *ngFor="let item of ranking2">
+              <div class="py-3" fxLayout="row" fxLayoutAlign="start center">
+                <div @scaleIn class="w-10 h-10 rounded-full bg-primary-light text-primary ltr:mr-3 rtl:ml-3 flex items-center justify-center">
+                  <img src="{{item.Foto}}" style="max-width: 25px;">
+                </div>
+      
+                <div @fadeInRight>
+                  <button @fadeInRight class="m-0 body-1 cursor-pointer">{{item.NomeEmpresa}}</button>
+                </div>
+              </div>
+            </div>
+          </div>
+      
+        </div>
+      </cdk-virtual-scroll-viewport>
+    </div>
+  <!-- Menu -->
+    </div>
+  </div>
+</div>
+
+<ngx-scrolltop>
+  <i class="fa fa-arrow-up"></i>
+</ngx-scrolltop>

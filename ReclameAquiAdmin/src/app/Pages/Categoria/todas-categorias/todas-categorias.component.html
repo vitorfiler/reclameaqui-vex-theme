@@ -1,0 +1,26 @@
+
+<div class="text-center py-0 header" @stagger>
+  <div class="bg-card py-16 px-gutter">
+    <h1 @fadeInUp class="display-2 mt-0 mb-4 text-center">Explore todas as categorias</h1>
+    <h4 @fadeInUp class="text-hint display-1 mt-0 mb-2 text-center">Veja todas as categorias, pesquise e encontre a melhor.</h4>
+  
+  </div>
+  <!-- linha -->
+    <div class="my-12 container"
+         fxLayout="row"
+         fxLayout.xs="column"
+         fxLayoutAlign="start start" 
+         *ngFor="let linha of tela;"
+         fxLayoutAlign.xs="start stretch"
+         fxLayoutGap="24px">
+
+         <div @fadeInUp (click)="renderizaRankings(nome.idCategoriaFilha)" [routerLink]="['/',nome.rota]" [ngStyle]="{backgroundColor:nome.cor}" *ngFor="let nome of linha;let i=index" class="card p-6 fundo-all fundo-1" fxFlex fxLayout="column" fxLayoutAlign="start center">  
+          <h2 class="headline my-6">{{nome.nomeMae}}</h2>
+          <div class="body-1">{{nome.nomeFilha}}</div>
+        </div>
+    </div>
+    <!-- linha -->
+  </div>
+
+ 
+   

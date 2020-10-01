@@ -1,0 +1,47 @@
+@media screen and (max-width: 600px) {
+    // .col-25, .col-75, input[type=submit], input[type=reset]{
+    //   width: 100%;
+    //   margin-top: 0;
+    // }
+    // .size{
+    //     padding-left: 0%;
+    //     padding-top: 3%;
+        
+    // }
+
+  }
+
+  @media screen and (min-width: 600px) {
+    // .div-button {
+    //   position: relative;
+    //   float: right;
+    // }
+    .sizeEndereco{
+        // padding-left: 8%;
+
+    }
+    .size{
+      // margin-left: -40%;
+  }
+    // input[type=text], select, textarea, [type=number], [type=month] {
+    //   width: 50%;
+    //   border: 1px solid #ccc;
+    //   border-radius: 4px;
+    //   resize: vertical;
+    //   float: left;
+    // }
+  }
+  .tamanho{
+    padding-right: -45%;
+
+  }
+  .example-viewport {
+    height: 450px;
+    width: 360px;
+  }
+
+  .my-custom-style {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+  }

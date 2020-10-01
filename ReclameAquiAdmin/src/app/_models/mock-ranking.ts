@@ -1,0 +1,1 @@
+export let MELHOR_INDICE_SOLUCAO = []

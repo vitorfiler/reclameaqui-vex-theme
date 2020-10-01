@@ -1,0 +1,121 @@
+<div class="text-center py-24 header stepsContainer">
+  <div class="stepCircle" [ngStyle]="{'background': stepOne ? 'green':'lightgrey'}">
+    1
+  </div>
+  <div class="stepConectorPiece" [ngStyle]="{'background': stepOne ? 'green':'lightgrey'}"></div>
+  <div class="stepCircle" [ngStyle]="{'background': stepTwo ? 'green' : 'lightgrey'}">
+    2
+  </div>
+  <div class="stepConectorPiece" [ngStyle]="{'background': stepTwo ? 'green' : 'lightgrey'}"></div>
+  <div class="stepCircle" [ngStyle]="{'background': stepThree ? 'green':'lightgrey'}">
+    3
+  </div>
+</div>
+
+<div [formGroup]="formSelectEmp" style="margin-top: -9%;" class="text-center py-24 header" *ngIf="personalInfoComplete">
+  <h3 @fadeInUp class="display-2 mt-16 mb-8">Encontre a empresa para reclamar</h3>
+  <div class="row">
+    <div class="col-md-6">
+      <label>Qual o nome da Empresa?</label>
+    </div>
+    <div class="col-md-6">
+      <a  href="#"><label style="cursor: pointer;">Não Encontrou a Empresa?</label></a>
+    </div>
+  </div>
+  <div @fadeInUp class="border rounded-full bg-card py-2 pl-6 pr-3 text-secondary max-w-xl mx-auto shadow-8"
+    fxLayout="row" fxLayoutAlign="start center" matAutocompleteOrigin #origin="matAutocompleteOrigin">
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="empresaSubmit()">
+      <mat-option *ngFor="let emp of filteredOptions | async" [value]="emp.id">{{emp.nome}}</mat-option>
+    </mat-autocomplete>
+    
+    <ic-icon [icon]="icSearch" fxFlex="none" size="24px"></ic-icon>
+    <input class="border-0 ml-4 placeholder:text-secondary subheading-2 outline-none font-medium w-0 bg-card"
+      fxFlex="auto" placeholder="Antes de comprar pesquise a reputação da Empresa" type="text"
+      formControlName="selectEmp"
+      [formControl] = "myControl" 
+      [matAutocomplete] = "auto"
+      [matAutocompleteConnectedTo]="origin"
+      matInput
+      [(ngModel)]="reclamacaoSave.EmpresaId">
+  </div>
+</div>
+
+<div [formGroup]="formDadosReclamacao" style="margin-top: -9%; padding-right: 15%; padding-left: 15%;" class="text-center py-24 header"
+  *ngIf="addressComplete">
+  <div @fadeInUp class="card" fxFlex="auto">
+    <h2 @fadeInUp class="display-2 mt-16 mb-8">Dados da reclamação</h2>
+    <label> Você está reclamando dê: {{nomeEmpresa}}</label> &nbsp;
+    <button (click)="selecionarEmpresaSubmit()" mat-button type="button">Trocar Empresa</button>
+    <div class="px-6 py-4 border-b" fxLayout="row" fxLayoutAlign="start center">
+    </div>
+
+    <div style="margin-top: -6%;" class="px-6 py-4" fxLayout="column">
+      <mat-form-field>
+        <mat-label>Titulo da reclamação</mat-label>
+        <input [(ngModel)]="reclamacaoSave.Titulo" matInput required formControlName="titulo">
+      </mat-form-field>
+      <mat-radio-group [(ngModel)]="reclamacaoSave.FlagCovid" fxLayout="row" fxLayoutGap="16px">
+        <mat-label>O problema que você está tendo ocorreu por causa da pandemia da COVID-19/Coronavirus?</mat-label>
+        <mat-radio-button value="1">Sim</mat-radio-button>
+        <mat-radio-button [checked]="true" value="0">Não</mat-radio-button>
+      </mat-radio-group>
+      <mat-form-field fxFlex>
+        <mat-label>Detalhes da reclamação</mat-label>
+        <textarea [(ngModel)]="conteudoReclamacao.Conteudo" matInput matTextareaAutosize required formControlName="conteudo"></textarea>
+      </mat-form-field>
+      Clique e selecione seus Arquivos:
+      <div class="uploadfilecontainer" (click)="fileInput.click()" appDragDrop (onFileDropped)="uploadFile($event)">
+        <input hidden type="file" #fileInput (change)="uploadFile($event.target.files)">
+      </div>
+        <div  class="files-list" *ngFor="let file of files;let i=index">
+          <p>{{ file }}</p>
+          <button class="delete-file" (click)="deleteAttachment(i)">
+            <img src="../../../assets/Recycle_Bin_Full.png">
+          </button>
+        </div>
+        Qual o telefone que a empresa pode entrar em contato?
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field>
+              <mat-label>Celular</mat-label>
+              <input [(ngModel)]="reclamacaoSave.TelContato" [mask]="mascaraCelular()" matInput required formControlName="contato">
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field>
+              <mat-label>Telefone</mat-label>
+              <input [(ngModel)]="reclamacaoSave.TelContato2" [mask]="mascaraTelefone()" formControlName="contato2" matInput>
+            </mat-form-field>
+          </div>
+        </div>
+        
+        
+
+      <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="8px">
+        <button (click)="dadosReclamacaoSubmit()" [disabled]="formDadosReclamacao.invalid" color="primary" mat-raised-button type="button">Enviar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="margin-top: -9%; padding-right: 15%; padding-left: 15%;" class="text-center py-24 header"
+  *ngIf="creditCardComplete">
+
+  <div @fadeInUp class="card" fxFlex="auto">
+    <h2 @fadeInUp class="display-2 mt-16 mb-8">História Contada</h2>
+    <div class="px-6 py-4 border-b" fxLayout="row" fxLayoutAlign="start center">
+        <div class="row">
+          <div class="col-md-12">
+            <label>Você Abriu a Reclamação: {{reclamacaoId}} contra a Empresa: {{nomeEmpresa}}, Dentro de instantes você receberá 
+              um e-mail contendo todos os dados da sua reclamação e poderá acompanhar através do seu portal.
+            </label>
+          </div>
+        </div>
+    </div>
+    <div style="margin-top: -6%;" class="px-6 py-4" fxLayout="column">
+      <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="8px">
+        <button (click)="finalizarSubmit()" color="primary" mat-raised-button type="button">Finalizar</button>
+      </div>
+    </div>
+  </div>
+</div>
