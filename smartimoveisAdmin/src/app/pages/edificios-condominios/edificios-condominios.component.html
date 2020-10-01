@@ -1,0 +1,58 @@
+<div class="header">
+  <div class="example-header"></div>
+
+  <div class="container mat-elevation-z8">
+    <div class="row" >
+      <div class="col-sm-3">
+        <mat-form-field appearance="outline">
+          <mat-label>Filtrar</mat-label>
+          <input matInput placeholder="filtrar" (keyup)="applyFilter($event.target.value)">
+          <mat-icon [icIcon]="icSearch" matSuffix></mat-icon>
+        </mat-form-field>
+      </div>
+      <div class="col add">
+        <button style="max-height: 37px;" (click)="cadastro()" mat-raised-button color="primary">Cadastrar edifício/condomínio</button>
+      </div>
+    </div>
+    
+    <cdk-virtual-scroll-viewport [itemSize]="18 * 7" class="example-viewport">
+    <mat-table [dataSource]="dataSource" matSort>
+
+      <ng-container matColumnDef="Nome">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Edificio/Condomínio </mat-header-cell>
+        <mat-cell class="rows" style="text-align: left;" *matCellDef="let row"> {{row.nome || "-"}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Endereco">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Endereço </mat-header-cell>
+        <mat-cell class="rows" *matCellDef="let row"> {{row.endereco}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Telefone">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Telefone </mat-header-cell>
+        <mat-cell class="rows" *matCellDef="let row"> {{row.telefone1 || "-" }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Zelador">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Zelador </mat-header-cell>
+        <mat-cell class="rows" *matCellDef="let row" [style.color]="row.color"> {{row.zelador || "-"}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Acoes">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Ações </mat-header-cell>
+          <mat-cell class="rows" *matCellDef="let row" [style.color]="row.color">
+            <img (click)="editar(row.id)" style="cursor: pointer; max-width: 25px;" src="../../../assets/edit.png">
+            <img (click)="delete(row.id)" style="cursor: pointer; max-width: 25px; margin-left: 15px;" src="../../../assets/Recycle_Bin_Full.png">
+          </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;">
+      </mat-row>
+    </mat-table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    </cdk-virtual-scroll-viewport>
+  </div>
+</div>
+

@@ -1,0 +1,35 @@
+:host {
+  bottom: 0;
+  display: block;
+  width: 100%;
+  z-index: var(--footer-z-index);
+}
+
+.footer {
+  background: var(--footer-background);
+  color: var(--footer-color);
+  height: var(--footer-height);
+  padding-left: var(--padding);
+  padding-right: var(--padding);
+  position: relative;
+  z-index: var(--footer-z-index);
+  height: 130px;
+}
+
+.info h2 {
+  font-weight: bolder;
+}
+
+@media screen and (max-width: 600px){
+  .info {
+    margin-left: -20%;
+    // padding-top: 35%;
+  }
+}
+
+@media screen and (min-width: 600px){  
+  .info {
+    margin: auto;
+    // margin-top: 15%;
+  }
+}

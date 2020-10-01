@@ -1,0 +1,262 @@
+<div class="header">
+  <div class="text-center py-24 stepsContainer">
+    <div class="stepCircle" [ngStyle]="{'background': stepOne ? 'green':'lightgrey'}">
+      1
+    </div>
+    <div class="stepConectorPiece" [ngStyle]="{'background': stepOne ? 'green':'lightgrey'}"></div>
+    <div class="stepCircle" [ngStyle]="{'background': stepTwo ? 'green' : 'lightgrey'}">
+      2
+    </div>
+    <div class="stepConectorPiece" [ngStyle]="{'background': stepTwo ? 'green' : 'lightgrey'}"></div>
+    <div class="stepCircle" [ngStyle]="{'background': stepThree ? 'green':'lightgrey'}">
+      3
+    </div>
+  </div>
+  <div class="text-center py-24 formSizeDefault">
+    <div class="flex-1 sm:ltr:ml-4 sm:rtl:mr-4" *ngIf="personalInfoComplete">
+      <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px">
+        <div @fadeInUp class="card" fxFlex="auto">
+          <div class="px-6 py-4 border-b" fxLayout="row" fxLayoutAlign="start center">
+            <h2 class="title m-0">Endereço</h2>
+          </div>
+
+          <form [formGroup]="formDadosEdificio" class="px-6 py-4" fxLayout="column">
+            <mat-form-field fxLayout="row" appearance="outline">
+              <mat-label>Codigo do Edifício (REF)</mat-label>
+              <input formControlName="idRef" id="idRef" name="idRef" maxlength="15" matInput required>
+            </mat-form-field>
+
+            <mat-radio-group fxLayout="row" fxLayoutGap="16px">
+              <mat-radio-button value="1">Edifício</mat-radio-button>
+              <mat-radio-button [checked]="true" value="0">Condomínio</mat-radio-button>
+            </mat-radio-group>
+
+            <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
+
+              <mat-form-field fxFlex="auto" appearance="outline">
+                <mat-label>Nome</mat-label>
+                <input  formControlName="nome" maxlength="40" matInput required>
+              </mat-form-field>
+
+              <mat-form-field fxFlex="auto" appearance="outline">
+                <mat-label>Zelador</mat-label>
+                <input formControlName="zelador" maxlength="40" matInput required>
+              </mat-form-field>
+
+              <mat-form-field fxFlex="auto" appearance="outline">
+                <mat-label>Telefone 1</mat-label>
+                <input formControlName="telefone1" id="telefone1" name="telefone1" mask="(00) 0000-0000" matInput required>
+              </mat-form-field>
+
+              <mat-form-field fxFlex="auto" appearance="outline">
+                <mat-label>Telefone 2</mat-label>
+                <input formControlName="telefone2" id="telefone2" name="telefone2" mask="(00) 0000-0000" matInput required>
+              </mat-form-field>
+            </div>
+
+            <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
+              
+              <mat-form-field fxFlex="auto" appearance="outline">
+                <mat-label>Celular 1</mat-label>
+                <input formControlName="celular1" id="celular1" name="celular1" mask="(00) 0*" maxlength="14" matInput required>
+              </mat-form-field>
+              <mat-form-field fxFlex="auto" appearance="outline">
+                <mat-label>Celular 2</mat-label>
+                <input formControlName="celular2" id="celular2" name="celular2" mask="(00) 0*" maxlength="14" matInput required>
+              </mat-form-field>
+              <mat-form-field fxFlex="auto" appearance="outline">
+                <mat-label>UF</mat-label>
+                <input formControlName="uf" id="uf" name="uf"  mask="SS" maxlength="2" matInput required>
+              </mat-form-field>
+              <mat-form-field fxFlex="auto" appearance="outline">
+                <mat-label>Cidade</mat-label>
+                <input formControlName="cidade" id="cidade" name="cidade" maxlength="40" matInput required>
+              </mat-form-field>
+            </div>
+
+            <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
+              <mat-form-field fxFlex="auto" appearance="outline">
+                <mat-label>Bairro</mat-label>
+                <input formControlName="bairro" id="bairro" name="bairro" maxlength="40" matInput required>
+              </mat-form-field>
+              <mat-form-field fxFlex="auto" appearance="outline">
+                <mat-label>CEP</mat-label>
+                <input formControlName="cep" id="cep" name="cep" mask="00000-000" matInput required>
+              </mat-form-field>
+              <mat-form-field fxFlex="auto" appearance="outline">
+                <mat-label>Logradouro</mat-label>
+                <input formControlName="logradouro" maxlength="40" matInput required>
+              </mat-form-field>
+              <mat-form-field fxFlex="auto" appearance="outline">
+                <mat-label>Número</mat-label>
+                <input formControlName="numero" matInput required mask="0*" maxlength="15">
+              </mat-form-field>
+            </div>
+
+            <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
+              <mat-form-field fxFlex="auto" appearance="outline">
+                <mat-label>Complemento</mat-label>
+                <input formControlName="complemento" id="complemento" name="complemento" maxlength="60" matInput>
+              </mat-form-field>
+              <mat-form-field fxFlex="auto" appearance="outline">
+                <mat-label>Latitude</mat-label>
+                <input formControlName="latitude" id="latitude" name="latitude" maxlength="15" matInput>
+              </mat-form-field>
+              <mat-form-field fxFlex="auto" appearance="outline">
+                <mat-label>Longitude</mat-label>
+                <input formControlName="longitude" id="longitude" name="longitude" maxlength="15" matInput>
+              </mat-form-field>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="8px">
+              <button (click)="envioDados()" color="primary" mat-raised-button type="button">Próximo</button>
+              <button (click)="cancelar()" type="reset" color="warn" mat-raised-button type="button">Cancelar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    </div>
+
+  <div class="text-center py-24 formSizeDefault" *ngIf="addressComplete">
+    <div *ngIf="edicao" style="margin-bottom: 10px;"  class="row">
+      <div @fadeInUp class="card" fxFlex="auto" *ngIf="fotosAreas" >
+        <h2 @fadeInUp class="display-1 mt-4 mb-8">Áreas</h2>
+        <div class="row" style="margin: auto; margin-left: 50px; margin-bottom: 40px;">
+          <div *ngFor="let area of preencheFotosArea; let i = index;">
+            <div class="card cardHover" style="border: none; height: 250px; width: 250px; margin-right: 40px; margin-top: 20px; margin-bottom: 20px;">
+              <div fxFlex="auto"> 
+                <img style="margin: auto; margin-top: 5px; width: 240px; height: 180px;" src="{{area.endereco}}"/>
+                <button class="delete-foto" (click)="deleteImage(area.id, 4)"><img src="../../../assets/x-delete.png"></button>
+              </div>
+              <div>
+                <div>
+                  <mat-form-field fxFlex="auto" appearance="none" style="margin: 15px;">
+                    <mat-label>Ordem</mat-label>
+                    <input [(ngModel)]="preencheFotosArea[i].ordem" matInput style="font-size: 15px;">
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 5%;" *ngIf="edicao" style="margin-bottom: 10px;" class="row">
+      <div @fadeInUp class="card" fxFlex="auto" *ngIf="fotosPlantas">
+        <h2 @fadeInUp class="display-1 mt-4 mb-8">Plantas</h2>
+        <div class="row" style="margin: auto; margin-left: 50px; margin-bottom: 40px;">
+          <div *ngFor="let planta of preencheFotos; let i = index;">
+            <div class="card cardHover" style="border: none; height: 250px; width: 250px; margin-right: 40px; margin-top: 20px; margin-bottom: 20px;">
+              <div fxFlex="auto"> 
+                <img style="margin: auto; margin-top: 5px; width: 240px; height: 180px;" src="{{planta.endereco}}"/>
+                <button class="delete-foto" (click)="deleteImage(planta.id, 5)"><img src="../../../assets/x-delete.png"></button>
+              </div>
+              <div>
+                <div>
+                  <mat-form-field fxFlex="auto" appearance="none" style="margin: 15px;">
+                    <mat-label>Ordem</mat-label>
+                    <input [(ngModel)]="preencheFotos[i].ordem" matInput style="font-size: 15px;">
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <div @fadeInUp class="card" fxFlex="auto">
+          <h2 @fadeInUp class="display-1 mt-4 mb-8">Inserir áreas</h2>
+
+          <div  class="px-6 py-4" fxLayout="column">
+            Clique e selecione as Áreas do Edifício / Condomínio:
+            <div class="uploadfilecontainer" (click)="fileInput1.click()" appDragDrop (onFileDropped)="uploadFile($event, 1)">
+              <input hidden type="file" #fileInput1 (change)="uploadFile($event.target.files, 1)">
+            </div>
+              <div class="files-list" *ngFor="let file of files1;let i=index">
+                <p>{{ file }}</p>
+                <button class="delete-file" (click)="deleteAttachment(i,1)"><img src="../../../assets/Recycle_Bin_Full.png"></button>
+              </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div @fadeInUp class="card" fxFlex="auto">
+          <h2 @fadeInUp class="display-1 mt-4 mb-8">Inserir plantas</h2>
+      
+          <div  class="px-6 py-4" fxLayout="column">        
+            Clique e selecione as Plantas do Edifício / Condomínio:
+            <div class="uploadfilecontainer" (click)="fileInput2.click()" appDragDrop (onFileDropped)="uploadFile($event, 2)">
+              <input hidden type="file" #fileInput2 (change)="uploadFile($event.target.files,2)">
+            </div>
+            <div  class="files-list" *ngFor="let file of files2;let i=index">
+              <p>{{ file }}</p>
+              <button class="delete-file" (click)="deleteAttachment(i,2)">
+                <img src="../../../assets/Recycle_Bin_Full.png">
+              </button>
+            </div>
+      
+            <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="8px">
+              <button (click)="proximo()" color="primary" mat-raised-button type="button">Próximo</button>
+              <button (click)="cancelar()" type="reset" color="warn" mat-raised-button type="button">Cancelar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="text-center py-24 formSizeDefault" *ngIf="creditCardComplete">
+    <div *ngIf="edicao" style="margin-bottom: 2%;" class="row">
+      <div @fadeInUp class="card" fxFlex="auto" *ngIf="fotosEdificioCondominio">
+        <h2 @fadeInUp class="display-1 mt-4 mb-8">Fotos</h2>
+        <div class="row" style="margin: auto; margin-left: 50px; margin-bottom: 40px;">
+          <div *ngFor="let foto of preencheFotosCondominio; let i = index;">
+            <div class="card cardHover" style="border: none; height: 250px; width: 250px; margin-right: 40px; margin-top: 20px; margin-bottom: 20px;">
+              <div fxFlex="auto"> 
+                <img style="margin: auto; margin-top: 5px; width: 240px; height: 180px;" src="{{foto.endereco}}"/>                
+                <button class="delete-foto" (click)="deleteImage(foto.id, 1)"><img src="../../../assets/x-delete.png"></button>
+              </div>
+              <!-- <mat-icon [icIcon]="'delete'"></mat-icon> -->
+              <div>
+                <div>
+                  <mat-form-field fxFlex="auto" appearance="none" style="margin: 15px;">
+                    <mat-label>Ordem</mat-label>
+                    <input [(ngModel)]="preencheFotosCondominio[i].ordem" matInput style="font-size: 15px;">
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" >
+      <div @fadeInUp class="card" fxFlex="auto">
+        <h2 @fadeInUp class="display-1 mt-4 mb-8">Inserir fotos do edifício ou condomínio</h2>
+    
+        <div class="px-6 py-4" fxLayout="column">
+          Clique e selecione as fotos do Edifício / Condomínio:
+          <div class="uploadfilecontainer" (click)="fileInput3.click()" appDragDrop (onFileDropped)="uploadFile($event, 3)">
+            <input hidden type="file" #fileInput3 (change)="uploadFile($event.target.files, 3)">
+          </div>
+            <div  class="files-list" *ngFor="let file of files3; let i=index">
+              <p>{{ file }}</p>
+              <button class="delete-file" (click)="deleteAttachment(i,3)"><img src="../../../assets/Recycle_Bin_Full.png"></button>
+            </div>
+    
+          <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="8px">
+            <button (click)="finalizarSubmit(4, 5, 1)" color="primary" mat-raised-button type="button">{{register}}</button>
+            <button (click)="cancelar()" type="reset" color="warn" mat-raised-button type="button">Cancelar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

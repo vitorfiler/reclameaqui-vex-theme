@@ -1,0 +1,58 @@
+<div class="header">
+  <div class="example-header"></div>
+  
+  <div class="container mat-elevation-z8" style="padding-bottom: 20px;">
+    
+    <cdk-virtual-scroll-viewport [itemSize]="18 * 7" class="example-viewport">
+        <mat-table [dataSource]="dataSource" matSort>
+    
+            <ng-container matColumnDef="Id">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Id </mat-header-cell>
+                <mat-cell class="rows" style="text-align: left;" *matCellDef="let row"> {{row.id || "-"}} </mat-cell>
+            </ng-container>
+        
+            <ng-container matColumnDef="Nome">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Nome do Parceiro </mat-header-cell>
+                <mat-cell class="rows" style="text-align: left;" *matCellDef="let row"> {{row.oParceiro.nome || "-"}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Anuncio Simples">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Anúncio Simples </mat-header-cell>
+
+                <mat-cell class="rows" style="text-align: left;" *matCellDef="let row; let i = index">
+                    <mat-form-field fxFlex="auto" appearance="outline" style="margin-bottom: -15px; margin-top: 5px;">
+                        <input [(ngModel)]="listPartner[i].anuncioSimples" matInput mask="0*" maxlength="3">
+                    </mat-form-field>
+                </mat-cell>
+            </ng-container>
+                
+            <ng-container matColumnDef="Destaque">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Destaque </mat-header-cell>
+                <mat-cell class="rows" style="text-align: left;" *matCellDef="let row; let i = index">
+                    <mat-form-field fxFlex="auto" appearance="outline" style="margin-bottom: -15px; margin-top: 5px;">
+                        <input [(ngModel)]="listPartner[i].destaque" matInput mask="0*" maxlength="3">
+                    </mat-form-field>
+                </mat-cell>
+            </ng-container>
+            
+            <ng-container matColumnDef="Super Destaque">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Super Destaque </mat-header-cell>
+                <mat-cell class="rows" style="text-align: left;" *matCellDef="let row; let i = index">
+                    <mat-form-field fxFlex="auto" appearance="outline" style="margin-bottom: -15px; margin-top: 5px;">
+                        <input [(ngModel)]="listPartner[i].superDestaque" matInput mask="0*" maxlength="3">
+                    </mat-form-field>
+                </mat-cell>
+            </ng-container>     
+        
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;">
+            </mat-row>
+        </mat-table>        
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    </cdk-virtual-scroll-viewport>
+
+    <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="8px">
+        <button (click)="atualizar()" color="primary" mat-raised-button type="button">Atualizar</button>    
+    </div>
+  </div>
+</div>

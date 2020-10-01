@@ -1,0 +1,106 @@
+<div class="header">
+    <div class="example-header">
+        <!-- aqui deve ser feito o filtro -->
+    </div>
+
+  <div class="container mat-elevation-z8" *ngIf="!viewListContacts">
+    <cdk-virtual-scroll-viewport [itemSize]="18 * 7" class="example-viewport">
+        <mat-table [dataSource]="dataSource" matSort>
+    
+        <ng-container matColumnDef="Id">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Id </mat-header-cell>
+            <mat-cell class="rows" style="text-align: left;" *matCellDef="let row"> {{row.id || "-"}} </mat-cell>
+        </ng-container>
+    
+        <ng-container matColumnDef="Nome">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Nome do Contato </mat-header-cell>
+            <mat-cell class="rows" style="text-align: left;" *matCellDef="let row"> {{row.nome || "-"}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="Status">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Status </mat-header-cell>
+            <mat-cell class="rows" style="text-align: left;" *matCellDef="let row"> {{row.status || "-"}} </mat-cell>
+        </ng-container>
+    
+        <ng-container matColumnDef="Data de Abertura">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Data de Abertura </mat-header-cell>
+            <mat-cell class="rows" style="text-align: left;" *matCellDef="let row"> {{row.dataAbertura || "-"}} </mat-cell>
+        </ng-container>
+    
+        <ng-container matColumnDef="Visualizar">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Visualizar </mat-header-cell>
+            <mat-cell class="rows" *matCellDef="let row" [style.color]="row.color">
+                <button (click)="visualizar(row)" style="cursor: pointer;" mat-stroked-button>Visualizar</button>
+            </mat-cell>
+        </ng-container>
+    
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;">
+        </mat-row>
+        </mat-table>
+    
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    </cdk-virtual-scroll-viewport>
+  </div>
+
+    <form [formGroup]="formVisualizar" class="text-center py-24 header formSizeDefault" *ngIf="viewListContacts" style="margin-top: -5%;">
+        <div @fadeInUp class="card" fxFlex="auto">
+            <div style="margin-left: 10%; margin-right: 10%; margin-top: 5%;" class="px-6 py-4" fxLayout="column">
+                
+                <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
+                    <div class="col">
+                    <mat-form-field fxFlex appearance="outline">
+                        <mat-label>Nome do Contato</mat-label>
+                        <input formControlName="nome" matInput>
+                    </mat-form-field>
+                    </div>
+                    <div class="col">
+                        <mat-form-field fxFlex appearance="outline">
+                            <mat-label>Email</mat-label>
+                            <input formControlName="email" matInput>
+                        </mat-form-field>
+                    </div> 
+                </div> 
+
+                <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
+                    <div class="col">
+                    <mat-form-field fxFlex appearance="outline">
+                        <mat-label>Telefone</mat-label>
+                        <input formControlName="telefone" matInput mask="(00) 0*">
+                    </mat-form-field>
+                    </div>
+                    <div class="col">
+                        <mat-form-field fxFlex appearance="outline">
+                            <mat-label>Data Abertura</mat-label>
+                            <input formControlName="dataAbertura" matInput>
+                        </mat-form-field>
+                    </div> 
+                </div> 
+
+                <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
+                    <div class="col">
+                    <mat-form-field fxFlex appearance="outline">
+                        <mat-label>Status</mat-label>
+                        <input formControlName="status" matInput style=" font-weight: bolder;">
+                    </mat-form-field>
+                    </div>
+                </div> 
+                <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
+                    <div class="col">
+                        <mat-form-field fxFlex appearance="outline">
+                            <mat-label>Mensagem</mat-label>
+                            <textarea formControlName="mensagem" rows="6" matInput></textarea>
+                        </mat-form-field>
+                    </div> 
+                </div> 
+
+                <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="8px">
+                    <button (click)="setRespondido()" color="primary" mat-raised-button type="button" [disabled]="disableButton">{{respondido}}</button>
+                    <button (click)="cancelar()" type="reset" color="warn" mat-raised-button type="button">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+  

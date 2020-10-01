@@ -1,0 +1,59 @@
+<div class="example-header">
+    <!-- aqui deve ser feito o filtro -->
+  </div>
+  
+  <div *ngIf="isTabelaBairro" class="container mat-elevation-z8">
+    
+    <div class="add">
+      <button (click)="formCadastro()" mat-raised-button color="primary">Cadastrar Bairro
+    </button>
+    </div>
+  
+    <mat-table [dataSource]="dataSource" matSort>
+  
+      <ng-container matColumnDef="Nome">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Bairro </mat-header-cell>
+        <mat-cell class="rows" style="text-align: left;" *matCellDef="let row"> {{row.nome || "-"}} </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="Acoes">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Ações </mat-header-cell>
+          <mat-cell class="rows" *matCellDef="let row" [style.color]="row.color">
+            <img style="cursor: pointer; max-width: 25px;" src="../../../assets/edit.png">
+          </mat-cell>
+      </ng-container>  
+  
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;">
+      </mat-row>
+    </mat-table>
+  
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  </div>
+
+  <div style="padding-top: 3%; padding-left: 37%; padding-right: 37%;" class="flex-1 sizeDadosPessoais sm:ltr:ml-4 sm:rtl:mr-4" *ngIf="isFormCadastroBairro">
+    <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px">
+      <div @fadeInUp class="card" fxFlex="auto">
+        <div class="px-6 py-4 border-b" fxLayout="row" fxLayoutAlign="start center">
+          <h2 class="title m-0">Bairro</h2>
+        </div>
+  
+        <div [formGroup]="formDadosBairro" class="px-6 py-4" fxLayout="column">
+  
+          <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
+            <div >
+                <mat-form-field fxFlex="auto">
+                    <mat-label>Nome</mat-label>
+                    <input formControlName="titulo" matInput required>
+                </mat-form-field>
+  
+            </div>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="8px">
+          <!-- <button color="primary" mat-raised-button type="button">Salvar</button> -->
+          <button (click)="cadastrarBairro()" type="button" class="btn btn-primary">Salvar</button>    
+      </div>
+    </div>
+  </div>
+  </div>
+  </div>

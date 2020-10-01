@@ -1,0 +1,67 @@
+import { EdificiosCondominios } from './edificios-condominios';
+import { Endereco } from './endereco';
+
+export class Imovel{
+    id: number;
+    nome: string;
+    referencia: string;
+    descricao: string;
+    tipo: string;
+    precoVenda: number;
+    precoLocacao: number;
+    precoCondominio: number;
+    complemento: string;
+    latitude: string;
+    longitude: string;
+    areaUtil: number;
+    areaTotal: number;
+    qtdDormitorios: number;
+    qtdSuites: number;
+    qtdBanheiros: number;
+    qtdSalas: number;
+    qtdVagas: number;
+    qtdElevador: number;
+    qtdUnidadesAndar: number;
+    anoConstrucao: number;
+    armarioCozinha: boolean;
+    armarioEmbutido: boolean;
+    estacionamentoVisitantes: boolean;
+    piscina: boolean;
+    quadraSquash: boolean;
+    quadraTenis: boolean;
+    quadraPoliesportiva: boolean;
+    salaGinastica: boolean;
+    salaoFestas: boolean;
+    salaoJogos: boolean;
+    sauna: boolean;
+    varanda: boolean;
+    lavabo: boolean;
+    depositoSubsolo: boolean;
+    closet: boolean;
+    hidromassagem: boolean;
+    lareira: boolean;
+    andarInteiro: boolean;
+    meioAndar: boolean;
+    salaAlmoco: boolean;
+    salaJantar: boolean;
+    salaIntima: boolean;
+    brinquedoteca: boolean;
+    playground: boolean;
+
+    churrasqueira: boolean;
+    copa: boolean;
+    dependenciaEmpregados: boolean;
+    despensa: boolean;
+    edicula: boolean;
+    quintal: boolean;
+
+    flagAtivo: boolean;
+    flagDestaque: boolean;
+    flagSuperDestaque: boolean;
+    enderecoId: number;
+    oEndereco: Endereco;
+    edificioId: number;
+    oEdificio: EdificiosCondominios;    
+    dataAlteracao: string;
+    usuarioAlteracao: boolean;
+}

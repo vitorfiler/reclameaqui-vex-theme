@@ -1,0 +1,45 @@
+<div class="header">
+    <div class="text-center py-24 stepsContainer"></div>  
+
+    <form [formGroup]="formDataPartner" class="text-center py-24 formSizeDefault">
+        <div @fadeInUp class="card" fxFlex="auto">
+            <h2 @fadeInUp class="display-2 mt-16 mb-8">Dados do Parceiro</h2>
+            <div style="margin-left: 10%; margin-right: 10%;" class="px-6 py-4" fxLayout="column">
+                <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
+                    <mat-form-field fxFlex="auto" appearance="outline">
+                        <mat-label>Nome Parceiro</mat-label>
+                        <input formControlName="nome" matInput required maxlength="50">
+                    </mat-form-field>
+                </div>  
+                <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
+                    <mat-form-field fxFlex="auto" appearance="outline">
+                        <mat-label>Tag Simples</mat-label>
+                        <input formControlName="tagSimples" matInput required maxlength="50">
+                    </mat-form-field>
+                </div> 
+                <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
+                    <mat-form-field fxFlex="auto" appearance="outline">
+                        <mat-label>Tag Destaque</mat-label>
+                        <input formControlName="tagDestaque" matInput required maxlength="50">
+                    </mat-form-field>
+                </div> 
+                <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
+                    <mat-form-field fxFlex="auto" appearance="outline">
+                        <mat-label>Tag Superdestaque</mat-label>
+                        <input formControlName="tagSuperDestaque" matInput required maxlength="50">
+                    </mat-form-field>
+                </div> 
+                <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
+                    <mat-form-field fxFlex="auto" appearance="outline">
+                        <mat-label>Nome do Arquivo XML</mat-label>
+                        <input formControlName="nomeArquivoXml" matInput required mask="A*" suffix=".xml" maxlength="50">
+                    </mat-form-field>
+                </div> 
+                <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="8px">
+                    <button (click)="registerPartner()" [disabled]="formDataPartner.invalid" color="primary" mat-raised-button type="button">{{register}}</button>
+                    <button (click)="cancelar()" type="reset" color="warn" mat-raised-button type="button">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

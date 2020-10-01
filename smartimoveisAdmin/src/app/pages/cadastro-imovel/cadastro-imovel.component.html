@@ -1,0 +1,591 @@
+<div class="header">
+  <div class="text-center py-24 stepsContainer">
+    <div class="stepCircle" [ngStyle]="{'background': stepOne ? 'green':'lightgrey'}">
+      1
+    </div>
+    <div class="stepConectorPiece" [ngStyle]="{'background': stepOne ? 'green':'lightgrey'}"></div>
+    <div class="stepCircle" [ngStyle]="{'background': stepTwo ? 'green' : 'lightgrey'}">
+      2
+    </div>
+    <div class="stepConectorPiece" [ngStyle]="{'background': stepTwo ? 'green' : 'lightgrey'}"></div>
+    <div class="stepCircle" [ngStyle]="{'background': stepThree ? 'green':'lightgrey'}">
+      3
+    </div>
+    <div class="stepConectorPiece" [ngStyle]="{'background': stepThree ? 'green' : 'lightgrey'}"></div>
+    <div class="stepCircle" [ngStyle]="{'background': stepFour ? 'green':'lightgrey'}">
+      4
+    </div>
+  </div>
+
+  <form [formGroup]="formDadosImovel" class="text-center py-24 formSizeDefault "
+    [hidden]="!personalInfoComplete">
+    <div @fadeInUp class="card" fxFlex="auto">
+      <h2 @fadeInUp class="display-2 mt-16 mb-8">Dados do Imóvel</h2>
+      <div style="margin-left: 5%; margin-right: 5%;" class="px-6 py-4" fxLayout="column">
+
+        <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
+          <div class="col-md-4">
+              <mat-form-field fxFlex="auto" appearance="outline">
+                  <mat-label>Ref</mat-label>
+                  <input [(ngModel)]="dadosImovel.referencia" formControlName="ref" matInput mask="0*" maxlength="15">
+              </mat-form-field>
+          </div>
+        </div>
+        <div style="margin-bottom: 1%; text-align: left;" fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
+          <div class="col-md-4">
+            <section class="example-section">
+              <mat-checkbox  [(ngModel)]="dadosImovel.destaque" formControlName="destaque" class="example-margin">Imóvel em Destaque</mat-checkbox>
+            </section>
+          
+            <section class="example-section">
+              <mat-checkbox  [(ngModel)]="dadosImovel.superDestaque" formControlName="superDestaque" class="example-margin">Imóvel em Super Destaque</mat-checkbox>
+            </section>
+          </div>
+        </div>
+        
+        <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
+          <div class="col-sm">
+            <mat-form-field appearance="outline" fxFlex>
+              <mat-label>Tipo</mat-label>
+              <mat-select [(ngModel)]="dadosImovel.tipo" formControlName="tipo" #myselect matNativeControl id="tipo" required>
+                <mat-option *ngFor="let tipoImovel of listTiposImoveis" [value]="tipoImovel">
+                  {{tipoImovel}}
+                </mat-option>
+              </mat-select>
+          </mat-form-field>
+          </div>
+          <div class="col-sm">
+            <mat-form-field appearance="outline" fxFlex>
+              <mat-label>Edifício / Condomínio</mat-label>
+              <mat-select formControlName="edificioSelect" [(value)]="edificioEdited" >
+                <mat-option *ngFor="let edificio of listEdificiosCondominios" [value]="edificio">
+                  {{edificio ? edificio.nome : edificio.nome}}
+                  </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
+          <div class="col">
+              <mat-form-field fxFlex="auto" appearance="outline">
+                  <mat-label>Preço</mat-label>
+                  <input [(ngModel)]="dadosImovel.precoVenda" formControlName="preco" matInput prefix="R$" mask="separator" thousandSeparator="." maxlength="15" required>
+              </mat-form-field>
+          </div>
+          <div class="col">
+              <mat-form-field fxFlex="auto" appearance="outline">
+                  <mat-label>Valor Condomínio</mat-label>
+                  <input [(ngModel)]="dadosImovel.precoCondominio" formControlName="condominio" matInput prefix="R$" mask="separator" thousandSeparator="." maxlength="15" required>
+              </mat-form-field>
+          </div>
+          <div class="col">
+              <mat-form-field fxFlex="auto" appearance="outline">
+                  <mat-label>Valor Locação</mat-label>
+                  <input [(ngModel)]="dadosImovel.precoLocacao" formControlName="precoLocacao" matInput prefix="R$" mask="separator" thousandSeparator="." maxlength="15" required>
+              </mat-form-field>
+          </div>
+        </div>
+
+        <!-- FOTO -->
+        <div @fadeInUp class="card" style="border: none; margin-bottom: 30px;" fxFlex="auto">
+          <h2>Foto Principal</h2>
+          <div *ngIf="fotosImoveis && edicao">  
+            <div fxLayoutAlign="center center">
+                <div class="card cardHover" style="border: none; height: 200px; width: 250px; margin-right: 40px; margin-top: 20px;">
+                  <div fxFlex="auto"> 
+                    <img style="margin: auto; margin-top: 5px; width: 240px; height: 190px;" src="{{fotoPrincipal}}"/>
+                  </div>
+                </div>
+            </div>
+          </div>
+
+          <!-- UPLOAD -->
+          <div class="px-6 py-4" fxLayout="column">
+            <div style="text-align: center;">Selecione uma foto principal para o imóvel</div>
+            <div class="uploadfilecontainer" (click)="fileInput1.click()" appDragDrop (onFileDropped)="uploadFile($event, 1)">
+              <input hidden type="file" #fileInput1 (change)="uploadFile($event.target.files, 1)">
+            </div>
+              <div class="files-list" *ngFor="let file of files1;let i=index">
+                <p>{{ file }}</p>
+                <button class="delete-file" (click)="deleteAttachment(i, 1)">
+                  <img src="../../../assets/Recycle_Bin_Full.png">
+                </button>
+              </div>
+          </div>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="8px">
+          <button (click)="empresaSubmit(dadosImovel)" [disabled]="formDadosImovel.invalid" color="primary" mat-raised-button type="button">Próximo</button>
+          <button (click)="cancelar()" type="reset" color="warn" mat-raised-button type="button">Cancelar</button>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <form [formGroup]="formDadosImovel2" class="text-center py-24 header formSizeDefault"
+    [hidden]="!addressComplete">
+    <div @fadeInUp class="card" fxFlex="auto">
+      <h2 @fadeInUp class="display-2 mt-16 mb-8">Dados para arquivo de importação</h2>
+
+      <div style="margin-left: 5%; margin-right: 5%;" class="px-6 py-4" fxLayout="column">
+          <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
+
+            <div class="col">
+              <mat-form-field fxFlex="auto"appearance="outline">
+                <mat-label>UF</mat-label>
+                <input [(ngModel)]="endereco.uf" formControlName="uf" matInput mask="SS" maxlength="2">
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field fxFlex="auto" appearance="outline">
+                <mat-label>Cidade</mat-label>
+                <input [(ngModel)]="endereco.cidade" formControlName="cidade" matInput>
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field fxFlex="auto"appearance="outline">
+                <mat-label>Bairro</mat-label>
+                <input [(ngModel)]="endereco.bairro" formControlName="bairro" matInput>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
+            <div class="col">
+              <mat-form-field fxFlex="auto" appearance="outline">
+                <mat-label>CEP</mat-label>
+                <input [(ngModel)]="endereco.cep" formControlName="cep" matInput mask="00000-000">
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field fxFlex="auto" appearance="outline">
+                <mat-label>Logradouro</mat-label>
+                <input [(ngModel)]="endereco.logradouro" formControlName="logradouro" matInput>
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field fxFlex="auto" appearance="outline">
+                <mat-label>Número</mat-label>
+                <input [(ngModel)]="endereco.numero" formControlName="numero" matInput>
+              </mat-form-field>
+            </div>
+          </div>
+          
+          <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
+            <div class="col">
+              <mat-form-field fxFlex="auto"appearance="outline">
+                <mat-label>Complemento</mat-label>
+                <input [(ngModel)]="endereco.complemento" formControlName="complemento" matInput>
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field fxFlex="auto"appearance="outline">
+                <mat-label>Latitude</mat-label>
+                <input [(ngModel)]="endereco.latitude" formControlName="latitude" matInput>
+              </mat-form-field>
+            </div>
+            <div class="col">
+              <mat-form-field fxFlex="auto"appearance="outline">
+                <mat-label>Longitude</mat-label>
+                <input [(ngModel)]="endereco.longitude" formControlName="longitude" matInput>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
+            <div class="col">
+                <mat-form-field fxFlex="auto"appearance="outline">
+                    <mat-label>Área Útil</mat-label>
+                    <input [(ngModel)]="dadosArquivoImportacao.areaUtil" formControlName="areaUtil" matInput suffix="m²" mask="0*" maxlength="15" required>
+                </mat-form-field>
+            </div>
+            <div class="col">
+                <mat-form-field fxFlex="auto"appearance="outline">
+                    <mat-label>Ano construção</mat-label>
+                    <input [(ngModel)]="dadosArquivoImportacao.anoConstrucao" formControlName="anoConstrucao" matInput mask="0000">
+                </mat-form-field>
+            </div>
+          </div>
+
+          <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
+            <div class="col">
+                <mat-form-field fxFlex="auto"appearance="outline">
+                    <mat-label>Qtd dormitórios</mat-label>
+                    <input [(ngModel)]="dadosArquivoImportacao.qtdDormitorios" formControlName="dormitorios" matInput mask="0*" maxlength="2" required>
+                </mat-form-field>
+            </div>
+            <div class="col">
+                <mat-form-field fxFlex="auto"appearance="outline">
+                    <mat-label>Qtd suítes</mat-label>
+                    <input [(ngModel)]="dadosArquivoImportacao.qtdSuites" formControlName="suites" matInput mask="0*" maxlength="2">
+                </mat-form-field>
+            </div>
+          </div>
+
+          <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
+            <div class="col">
+                <mat-form-field fxFlex="auto"appearance="outline">
+                    <mat-label>Qtd banheiros</mat-label>
+                    <input [(ngModel)]="dadosArquivoImportacao.qtdBanheiros" formControlName="banheiros" matInput mask="0*" maxlength="2">
+                </mat-form-field>
+            </div>
+            <div class="col">
+                <mat-form-field fxFlex="auto"appearance="outline">
+                    <mat-label>Qtd salas</mat-label>
+                    <input [(ngModel)]="dadosArquivoImportacao.qtdSalas" formControlName="salas" matInput mask="0*" maxlength="2">
+                </mat-form-field>
+            </div>
+          </div>
+
+          <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
+            <div class="col">
+                <mat-form-field fxFlex="auto"appearance="outline">
+                    <mat-label>Qtd vagas</mat-label>
+                    <input [(ngModel)]="dadosArquivoImportacao.qtdVagas"  formControlName="vagas" matInput mask="0*" maxlength="2">
+                </mat-form-field>
+            </div>
+            <div class="col">
+                <mat-form-field fxFlex="auto"appearance="outline">
+                    <mat-label>Qtd elevadores</mat-label>
+                    <input [(ngModel)]="dadosArquivoImportacao.qtdElevador" formControlName="elevadores" matInput mask="0*" maxlength="2">
+                </mat-form-field>
+            </div>
+          </div>
+
+          <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
+            <div class="col">
+                <mat-form-field fxFlex="auto"appearance="outline">
+                    <mat-label>Qtd unidades andar</mat-label>
+                    <input [(ngModel)]="dadosArquivoImportacao.qtdUnidadesAndar" formControlName="unidadesAndar" matInput mask="0*" maxlength="3">
+                </mat-form-field>
+            </div>
+            <div class="col">
+                <mat-form-field fxFlex="auto"appearance="outline">
+                    <mat-label>Qtd andar</mat-label>
+                    <input [(ngModel)]="dadosArquivoImportacao.qtdUnidadesAndar" formControlName="andar" matInput mask="0*" maxlength="2">
+                </mat-form-field>
+            </div>
+          </div>
+
+          <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="16px" fxLayoutGap.lt-sm="0">
+            <div class="col">
+              <mat-form-field fxFlex appearance="outline">
+                <mat-label>Descrição</mat-label>
+                <textarea [(ngModel)]="dadosArquivoImportacao.descricao" matInput formControlName="descricao" required></textarea>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <div class="text-center py-24 header fotosSizeDefault" [hidden]="!addressComplete">
+      <div @fadeInUp class="card" fxFlex="auto">
+        <div style="margin-left: 5%; margin-right: 5%;" class="px-6 py-4" fxLayout="column">
+          <!-- FOTO -->
+          <div @fadeInUp class="card" style="border: none; margin-bottom: 30px;" fxFlex="auto">
+            <div *ngIf="fotosPlantas && edicao">         
+              <h2>Fotos das Plantas</h2>
+              <div class="row" style="margin: auto; margin-left: 50px; margin-bottom: 20px;">
+                <div *ngFor="let fotos of preenchePlantasImovel; let i = index;">
+                  <div class="card cardHover" style="border: none; height: 250px; width: 250px; margin-right: 40px; margin-top: 20px; margin-bottom: 20px;">
+                    <div fxFlex="auto"> 
+                      <img style="margin: auto; margin-top: 5px; width: 240px; height: 180px;" src="{{fotos.endereco}}"/>
+                      <button class="delete-foto" (click)="deleteImage(fotos.id, 7)"><img src="../../../assets/x-delete.png"></button>
+                    </div>
+                    <div>
+                      <div>
+                        <mat-form-field fxFlex="auto" appearance="none" style="margin: 15px;">
+                          <mat-label>Ordem</mat-label>
+                          <input [(ngModel)]="preenchePlantasImovel[i].ordem" matInput style="font-size: 15px;">
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>             
+            <!-- UPLOAD -->
+            <div style="margin-top: -6%;" class="px-6 py-4" fxLayout="column">
+              <div style="text-align: center; margin-top: 4%;">Selecione as fotos das plantas do imóvel</div>
+              <div class="uploadfilecontainer" (click)="fileInput2.click()" appDragDrop (onFileDropped)="uploadFile($event, 2)">
+                <input hidden type="file" #fileInput2 (change)="uploadFile($event.target.files, 2)">
+              </div>
+                <div  class="files-list" *ngFor="let file of files2;let i=index">
+                  <p>{{ file }}</p>
+                  <button class="delete-file" (click)="deleteAttachment(i, 2)"><img src="../../../assets/Recycle_Bin_Full.png"></button>
+                </div>
+            </div>
+          </div>
+
+          <!-- FOTO -->
+          <div @fadeInUp class="card" style="border: none; margin-bottom: 30px;" fxFlex="auto">
+            <div *ngIf="fotosAreas && edicao">
+              <h2>Fotos das Áreas Comuns</h2>
+              <div class="row" style="margin: auto; margin-left: 50px; margin-bottom: 20px;">
+                <div *ngFor="let fotos of preencheAreasImovel; let i = index;">
+                  <div class="card cardHover" style="border: none; height: 250px; width: 250px; margin-right: 40px; margin-top: 20px; margin-bottom: 20px;">
+                    <div fxFlex="auto"> 
+                      <img style="margin: auto; margin-top: 5px; width: 240px; height: 180px;" src="{{fotos.endereco}}"/>
+                      <button class="delete-foto" (click)="deleteImage(fotos.id, 6)"><img src="../../../assets/x-delete.png"></button>
+                    </div>
+                    <div>
+                      <div>
+                        <mat-form-field fxFlex="auto" appearance="none" style="margin: 15px;">
+                          <mat-label>Ordem</mat-label>
+                          <input [(ngModel)]="preencheAreasImovel[i].ordem" matInput style="font-size: 15px;">
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>  
+            <!-- UPLOAD -->
+            <div style="margin-top: -6%;" class="px-6 py-4" fxLayout="column">
+              <div style="text-align: center; margin-top: 4%;">Selecione as fotos das áreas comuns do imóvel</div>
+              <div class="uploadfilecontainer" (click)="fileInput3.click()" appDragDrop (onFileDropped)="uploadFile($event, 3)">
+                <input hidden type="file" #fileInput3 (change)="uploadFile($event.target.files, 3)">
+              </div>
+                <div  class="files-list" *ngFor="let file of files3;let i=index">
+                  <p>{{ file }}</p>
+                  <button class="delete-file" (click)="deleteAttachment(i, 3)"><img src="../../../assets/Recycle_Bin_Full.png"></button>
+                </div>
+            </div>
+          </div>
+
+        <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="8px">
+          <button (click)="dadosReclamacaoSubmit(dadosArquivoImportacao, endereco, 1)" [disabled]="formDadosImovel2.invalid" color="primary" mat-raised-button type="button">Próximo</button>
+          <button (click)="cancelar()" type="reset" color="warn" mat-raised-button type="button">Cancelar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <form [formGroup]="formDadosImovel3" class="text-center py-24 header formSizeDefault"
+    [hidden]="!creditCardComplete">
+    <div @fadeInUp class="card" fxFlex="auto">
+      <h2 @fadeInUp class="display-2 mt-16 mb-8">Características</h2>
+
+      <div style="margin-left: 5%; margin-right: 5%; text-align: left;" class="px-6 py-4" fxLayout="column">
+    
+        <div class="row">
+          <div class="col-md-3">
+            <section class="example-section">
+              <mat-checkbox formControlName="armarioCozinha" [(ngModel)]="caracteristicas.armarioCozinha" class="example-margin">Armário Cozinha</mat-checkbox>
+            </section>
+          </div>
+          <div class="col-md-3">
+            <section class="example-section">
+              <mat-checkbox formControlName="salaoFestas" [(ngModel)]="caracteristicas.salaoFestas" class="example-margin">Salão de Festas</mat-checkbox>
+            </section>
+          </div>
+          <div class="col-md-3">
+            <section class="example-section">
+              <mat-checkbox formControlName="lareira" [(ngModel)]="caracteristicas.lareira" class="example-margin">Lareira</mat-checkbox>
+            </section>
+          </div>
+          <div class="col-md-3">
+            <section class="example-section">
+              <mat-checkbox formControlName="quadraPoliesportiva" [(ngModel)]="caracteristicas.quadraPoliesportiva" class="example-margin">Quadra Poliesportiva</mat-checkbox>
+            </section>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3">
+            <section class="example-section">
+              <mat-checkbox formControlName="armarioEmbutido" [(ngModel)]="caracteristicas.armarioEmbutido" class="example-margin">Armário Embutido</mat-checkbox>
+            </section>
+          </div>
+          <div class="col-md-3">
+            <section class="example-section">
+              <mat-checkbox formControlName="salaoJogos" [(ngModel)]="caracteristicas.salaoJogos" class="example-margin">Salão de Jogos</mat-checkbox>
+            </section>
+          </div>
+          <div class="col-md-3">
+            <section class="example-section">
+              <mat-checkbox formControlName="andarInteiro" [(ngModel)]="caracteristicas.andarInteiro" class="example-margin"> Andar Inteiro</mat-checkbox>
+            </section>
+          </div>
+          <div class="col-md-3">
+            <section class="example-section">
+              <mat-checkbox formControlName="quadraSquash" [(ngModel)]="caracteristicas.quadraSquash" class="example-margin">Quadra de Squash</mat-checkbox>
+            </section>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3">
+            <section class="example-section">
+              <mat-checkbox formControlName="estacionamentoVisitantes" [(ngModel)]="caracteristicas.estacionamentoVisitantes" class="example-margin">Estacionamento Visitantes</mat-checkbox>
+            </section>
+          </div>
+          <div class="col-md-3">
+            <section class="example-section">
+              <mat-checkbox formControlName="sauna" [(ngModel)]="caracteristicas.sauna" class="example-margin">Sauna</mat-checkbox>
+            </section>
+          </div>
+          <div class="col-md-3">
+            <section class="example-section">
+              <mat-checkbox formControlName="meioAndar" [(ngModel)]="caracteristicas.meioAndar" class="example-margin"> Meio Andar</mat-checkbox>
+            </section>
+          </div>
+          <div class="col-md-3">
+            <section class="example-section">
+              <mat-checkbox formControlName="quadraTenis" [(ngModel)]="caracteristicas.quadraTenis" class="example-margin">Quadra de Tênis</mat-checkbox>
+            </section>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3">
+            <section class="example-section">
+              <mat-checkbox formControlName="piscina" [(ngModel)]="caracteristicas.piscina" class="example-margin">Piscina</mat-checkbox>
+            </section>
+          </div>
+          <div class="col-md-3">
+            <section class="example-section">
+              <mat-checkbox formControlName="varanda" [(ngModel)]="caracteristicas.varanda" class="example-margin">Varanda</mat-checkbox>
+            </section>
+          </div>
+          <div class="col-md-3">
+            <section class="example-section">
+              <mat-checkbox formControlName="salaAlmoco" [(ngModel)]="caracteristicas.salaAlmoco" class="example-margin">Sala de Almoço</mat-checkbox>
+            </section>
+          </div>
+          <div class="col-md-3">
+            <section class="example-section">
+              <mat-checkbox formControlName="brinquedoteca" [(ngModel)]="caracteristicas.brinquedoteca" class="example-margin">Brinquedoteca</mat-checkbox>
+            </section>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3">
+            <section class="example-section">
+              <mat-checkbox formControlName="depositoSubsolo" [(ngModel)]="caracteristicas.depositoSubsolo" class="example-margin">Deposito no Subsolo</mat-checkbox>
+            </section>
+          </div>
+          <div class="col-md-3">
+            <section class="example-section">
+              <mat-checkbox formControlName="lavabo" [(ngModel)]="caracteristicas.lavabo" class="example-margin">Lavabo</mat-checkbox>
+            </section>
+          </div>
+          <div class="col-md-3">
+            <section class="example-section">
+              <mat-checkbox formControlName="salaJantar" [(ngModel)]="caracteristicas.salaJantar" class="example-margin">Sala de Jantar</mat-checkbox>
+            </section>
+          </div>
+          <div class="col-md-3">
+            <section class="example-section">
+              <mat-checkbox formControlName="salaGinastica" [(ngModel)]="caracteristicas.salaGinastica" class="example-margin">Sala Ginástica</mat-checkbox>
+            </section>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3">
+            <section class="example-section">
+              <mat-checkbox formControlName="hidromassagem" [(ngModel)]="caracteristicas.hidromassagem" class="example-margin">Hidromassagem</mat-checkbox>
+            </section>
+          </div>
+          <div class="col-md-3">
+            <section class="example-section">
+              <mat-checkbox formControlName="closet" [(ngModel)]="caracteristicas.closet" class="example-margin">Closet</mat-checkbox>
+            </section>
+          </div>
+          <div class="col-md-3">
+            <section class="example-section">
+              <mat-checkbox formControlName="salaIntima" [(ngModel)]="caracteristicas.salaIntima" class="example-margin">Sala Íntima</mat-checkbox>
+            </section>
+          </div>
+          <div class="col-md-3">
+            <section class="example-section">
+              <mat-checkbox formControlName="playground" [(ngModel)]="caracteristicas.playground" class="example-margin">Playground</mat-checkbox>
+            </section>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3">
+            <section class="example-section">
+              <mat-checkbox formControlName="churrasqueira" [(ngModel)]="caracteristicas.churrasqueira" class="example-margin">Churrasqueira</mat-checkbox>
+            </section>
+          </div>
+          <div class="col-md-3">
+            <section class="example-section">
+              <mat-checkbox formControlName="copa" [(ngModel)]="caracteristicas.copa" class="example-margin">Copa</mat-checkbox>
+            </section>
+          </div>
+          <div class="col-md-3">
+            <section class="example-section">
+              <mat-checkbox formControlName="dependenciaEmpregados" [(ngModel)]="caracteristicas.dependenciaEmpregados" class="example-margin">Dependência Empregados</mat-checkbox>
+            </section>
+          </div>
+          <div class="col-md-3">
+            <section class="example-section">
+              <mat-checkbox formControlName="despensa" [(ngModel)]="caracteristicas.despensa" class="example-margin">Despensa</mat-checkbox>
+            </section>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-3">
+            <section class="example-section">
+              <mat-checkbox formControlName="edicula" [(ngModel)]="caracteristicas.edicula" class="example-margin">Edícula</mat-checkbox>
+            </section>
+          </div>
+          <div class="col-md-3">
+            <section class="example-section">
+              <mat-checkbox formControlName="quintal" [(ngModel)]="caracteristicas.quintal" class="example-margin">Quintal</mat-checkbox>
+            </section>
+          </div>
+        </div>
+        
+        <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="8px">
+          <button (click)="proximoStep4()" color="primary" mat-raised-button type="button">Próximo</button>
+          <button (click)="cancelar()" type="reset" color="warn" mat-raised-button type="button">Cancelar</button>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <!-- FOTO -->
+  <div class="text-center py-24 header formSizeDefault" [hidden]="!stepFotos">
+    <div @fadeInUp class="card" style="border: none; margin-bottom: 30px;" fxFlex="auto">
+      <h2 @fadeInUp class="display-1 mt-4 mb-8">Fotos</h2>
+      <div *ngIf="fotosImoveis && edicao">
+        <div class="row" style="margin: auto; margin-left: 50px; margin-bottom: 20px;">
+          <div *ngFor="let fotos of preencheFotosImovel; let i = index;">
+            <div class="card cardHover" style="border: none; height: 250px; width: 250px; margin-right: 40px; margin-top: 20px; margin-bottom: 20px;">
+              <div fxFlex="auto"> 
+                <img style="margin: auto; margin-top: 5px; width: 240px; height: 180px;" src="{{fotos.endereco}}"/>
+                <button class="delete-foto" (click)="deleteImage(fotos.id, 2)"><img src="../../../assets/x-delete.png"></button>
+              </div>
+              <div>
+                <div>
+                  <mat-form-field fxFlex="auto" appearance="none" style="margin: 15px;">
+                    <mat-label>Ordem</mat-label>
+                    <input [(ngModel)]="preencheFotosImovel[i].ordem" matInput style="font-size: 15px;">
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- UPLOAD -->
+      <div style="margin-top: -6%;" class="px-6 py-4" fxLayout="column">
+        <div style="text-align: center; margin-top: 4%;">Selecione as demais fotos do imóvel:</div>
+        <div class="uploadfilecontainer" (click)="fileInput4.click()" appDragDrop (onFileDropped)="uploadFile($event, 4)">
+          <input hidden type="file" #fileInput4 (change)="uploadFile($event.target.files, 4)">
+        </div>
+        <div class="files-list" *ngFor="let file of files4;let i=index">
+          <p>{{ file }}</p>
+          <button class="delete-file" (click)="deleteAttachment(i, 4)"><img src="../../../assets/Recycle_Bin_Full.png"></button>
+        </div>
+
+        <div style="margin-left: auto; padding-top: 5%;" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="8px">
+          <button (click)="finalizarSubmit(caracteristicas, 8, 7, 6, 2)" color="primary" mat-raised-button type="button">{{register}}</button>
+          <button (click)="cancelar()" type="reset" color="warn" mat-raised-button type="button" style="margin-left:5px;">Cancelar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

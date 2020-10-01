@@ -1,0 +1,154 @@
+<div class="header">
+    <div class="text-center py-24 stepsContainer"></div>
+
+    <form [formGroup]="formDataPartnerXML" class="text-center py-24 formSizeDefault">
+        <div @fadeInUp class="card" fxFlex="auto">
+            <h2 @fadeInUp class="display-2 mt-16 mb-8">Cadastro do XML</h2>
+            <div style="margin-left: 5%; margin-right: 5%;" class="px-6 py-4" fxLayout="column">
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Escolha o parceiro</mat-label>
+                    <mat-select formControlName="partnerSelect" [(value)]="partnerEdit" [disabled]="editedXML">
+                        <mat-option *ngFor="let partner of listPartner" [value]="partner">
+                        {{partner.nome}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-grid-list [cols]="colsBreakpoint" rowHeight="680px" (window:resize)="onResize($event)">
+                    <mat-grid-tile>
+                        <div fxFlex fxLayout="column">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Insira a primeira tag do XML de Imóvel</mat-label>
+                                <textarea matInput formControlName="fieldXmlImovelInicio" required></textarea>
+                            </mat-form-field>
+
+                            <mat-form-field appearance="outline">
+                                <mat-label>Insira o corpo do XML de Imóvel</mat-label>
+                                <textarea matInput formControlName="fieldXmlImovelCorpo" rows="17" required></textarea>
+                            </mat-form-field>
+                        
+                            <mat-form-field appearance="outline">
+                                <mat-label>Insira a última tag de XML do Imóvel</mat-label>
+                                <textarea matInput formControlName="fieldXmlImovelFim" required></textarea>
+                            </mat-form-field>
+                        </div>
+                    </mat-grid-tile>
+                
+                    <mat-grid-tile>
+                        <cdk-virtual-scroll-viewport [itemSize]="18 * 7" class="example-viewport">
+                        <div fxFlex class="container" style="margin-top: 20px; margin-left: 2px;">
+                            <mat-table [dataSource]="dataSource" >
+                                <ng-container matColumnDef="Nome">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Nome </mat-header-cell>
+                                    <mat-cell  style="text-align: left;" *matCellDef="let row"> {{row.nome || "-"}} </mat-cell>
+                                </ng-container>
+                                
+                                <ng-container matColumnDef="Descricao">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Descrição </mat-header-cell>
+                                    <mat-cell style="text-align: left;" *matCellDef="let row"> {{row.descricao || "-"}} </mat-cell>
+                                </ng-container>
+
+                                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                                <mat-row *matRowDef="let row; columns: displayedColumns;">
+                                </mat-row>
+                            </mat-table>
+                            
+                            <mat-paginator [pageSizeOptions]="[10]"></mat-paginator>
+                        </div>
+                    </cdk-virtual-scroll-viewport>
+                    </mat-grid-tile>
+                
+                    <mat-grid-tile>
+                        <div fxFlex fxLayout="column">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Insira a primeira tag do XML de Fotos</mat-label>
+                                <textarea matInput formControlName="fieldXmlFotosInicio" required></textarea>
+                            </mat-form-field>
+
+                            <mat-form-field appearance="outline">
+                                <mat-label>Insira o corpo do XML de Fotos</mat-label>
+                                <textarea matInput formControlName="fieldXmlFotosCorpo" rows="17" required></textarea>
+                            </mat-form-field>
+                        
+                            <mat-form-field appearance="outline">
+                                <mat-label>Insira a última tag do XML de Fotos</mat-label>
+                                <textarea matInput formControlName="fieldXmlFotosFim" required></textarea>
+                            </mat-form-field>
+                        </div>
+                    </mat-grid-tile>
+                
+                    <mat-grid-tile>
+                        <cdk-virtual-scroll-viewport [itemSize]="18 * 7" class="example-viewport">
+                            <div fxFlex class="container" style="margin-top: 20px; margin-left: 2px;">
+                            <mat-table [dataSource]="dataSource" >
+                                <ng-container matColumnDef="Nome">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Nome </mat-header-cell>
+                                    <mat-cell  style="text-align: left;" *matCellDef="let row"> {{row.nome || "-"}} </mat-cell>
+                                </ng-container>
+                                
+                                <ng-container matColumnDef="Descricao">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Descrição </mat-header-cell>
+                                    <mat-cell style="text-align: left;" *matCellDef="let row"> {{row.descricao || "-"}} </mat-cell>
+                                </ng-container>
+
+                                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                                <mat-row *matRowDef="let row; columns: displayedColumns;">
+                                </mat-row>
+                            </mat-table>
+                            </div>
+                        </cdk-virtual-scroll-viewport>
+                    </mat-grid-tile>
+
+                    <mat-grid-tile>
+                        <div fxFlex fxLayout="column">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Insira a primeira tag do XML de Vídeos</mat-label>
+                                <textarea matInput formControlName="fieldXmlVideosInicio" required></textarea>
+                            </mat-form-field>
+
+                            <mat-form-field appearance="outline">
+                                <mat-label>Insira o corpo do XML de Vídeos</mat-label>
+                                <textarea matInput formControlName="fieldXmlVideosCorpo" rows="17" required></textarea>
+                            </mat-form-field>
+                        
+                            <mat-form-field appearance="outline">
+                                <mat-label>Insira a última tag do XML de Vídeos</mat-label>
+                                <textarea matInput formControlName="fieldXmlVideosFim" required></textarea>
+                            </mat-form-field>
+                        </div>
+                    </mat-grid-tile>
+                    
+                    <mat-grid-tile>
+                        <cdk-virtual-scroll-viewport [itemSize]="18 * 7" class="example-viewport">
+                            <div fxFlex class="container" style="margin-top: 20px; margin-left: 2px;">
+                                <mat-table [dataSource]="dataSource" >
+                                    <ng-container matColumnDef="Nome">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header> Nome </mat-header-cell>
+                                        <mat-cell  style="text-align: left;" *matCellDef="let row"> {{row.nome || "-"}} </mat-cell>
+                                    </ng-container>
+                                    
+                                    <ng-container matColumnDef="Descricao">
+                                        <mat-header-cell *matHeaderCellDef mat-sort-header> Descrição </mat-header-cell>
+                                        <mat-cell style="text-align: left;" *matCellDef="let row"> {{row.descricao || "-"}} </mat-cell>
+                                    </ng-container>
+
+                                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                                    <mat-row *matRowDef="let row; columns: displayedColumns;">
+                                    </mat-row>
+                                </mat-table>
+                            
+                            </div>
+                        </cdk-virtual-scroll-viewport>
+                    </mat-grid-tile>
+                </mat-grid-list>
+            
+
+                <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="8px">
+                    <button (click)="registerXML()" [disabled]="formDataPartnerXML.invalid || !formDataPartnerXML.dirty" color="primary" mat-raised-button type="button">{{register}}</button>            
+                    <button (click)="cancelar()" type="reset" color="warn" mat-raised-button type="button">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

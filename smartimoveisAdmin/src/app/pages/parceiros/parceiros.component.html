@@ -1,0 +1,109 @@
+<div class="header">
+  <div class="example-header"></div>
+  
+  <div class="container mat-elevation-z8">
+    
+    <div fxLayout="row" fxLayoutAlign="space-between start" style="margin-bottom: 1%;">
+        <button (click)="cadastro()" mat-raised-button color="primary">Cadastrar Parceiro</button>
+        <button (click)="cadastroXML()" mat-raised-button color="primary">Cadastrar XML</button>
+    </div>
+    
+    <cdk-virtual-scroll-viewport [itemSize]="18 * 7" class="example-viewport">
+    <mat-table [dataSource]="dataSource" matSort>
+  
+      <ng-container matColumnDef="Id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Id </mat-header-cell>
+        <mat-cell class="rows" style="text-align: left;" *matCellDef="let row"> {{row.id || "-"}} </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="Nome">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Nome do Parceiro </mat-header-cell>
+        <mat-cell class="rows" style="text-align: left;" *matCellDef="let row"> {{row.nome || "-"}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Editar Parceiro">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Editar Parceiro </mat-header-cell>
+          <mat-cell class="rows" *matCellDef="let row" [style.color]="row.color">
+            <img (click)="editarParceiro(row.id)" style="cursor: pointer; max-width: 25px;" src="../../../assets/edit.png">
+          </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Tag Simples">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Tag Simples </mat-header-cell>
+        <mat-cell class="rows" style="text-align: left;" *matCellDef="let row"> {{row.tagSimples || "-"}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Tag Destaque">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Tag Destaque </mat-header-cell>
+        <mat-cell class="rows" style="text-align: left;" *matCellDef="let row"> {{row.tagDestaque || "-"}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Tag Superdestaque">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Tag Superdestaque </mat-header-cell>
+        <mat-cell class="rows" style="text-align: left;" *matCellDef="let row"> {{row.tagSuperDestaque || "-"}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Nome do Arquivo XML">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Nome do Arquivo XML </mat-header-cell>
+        <mat-cell class="rows" style="text-align: left;" *matCellDef="let row"> {{row.nomeArquivoXml || "-"}} </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="Editar XML">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Editar XML </mat-header-cell>
+          <mat-cell class="rows" *matCellDef="let row" [style.color]="row.color">
+            <img (click)="editarXML(row.id)" style="cursor: pointer; max-width: 25px;" src="../../../assets/edit.png">
+          </mat-cell>
+      </ng-container>
+  
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;">
+      </mat-row>
+    </mat-table>
+  
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    </cdk-virtual-scroll-viewport>
+  </div>
+
+  <div class="container mat-elevation-z8">
+    
+    <h2 class="title" style="margin: 16px; text-align: center;">Controle de arquivos XML</h2>
+    <cdk-virtual-scroll-viewport [itemSize]="18 * 7" class="example-viewport">
+    <mat-table [dataSource]="dataSource2" matSort>
+  
+      <ng-container matColumnDef="Nome">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Nome do Parceiro </mat-header-cell>
+        <mat-cell class="rows" style="text-align: left;" *matCellDef="let row"> {{row.nomeParceiro || "-"}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Flag Arquivo XML">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Flag Arquivo XML </mat-header-cell>
+        <mat-cell class="rows" style="text-align: left;" *matCellDef="let row"> {{row.flagArquivoXML}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Data Solicitação">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Data Solicitação </mat-header-cell>
+        <mat-cell class="rows" style="text-align: left;" *matCellDef="let row"> {{row.dataSolicitacao || "-"}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Mensagem">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Mensagem </mat-header-cell>
+        <mat-cell class="rows" style="text-align: left;" *matCellDef="let row"> {{row.mensagem || "-"}} </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="Editar XML">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Editar XML </mat-header-cell>
+          <mat-cell class="rows" *matCellDef="let row" [style.color]="row.color">
+            <img (click)="editarXML(row.id)" style="cursor: pointer; max-width: 25px;" src="../../../assets/edit.png">
+          </mat-cell>
+      </ng-container>
+  
+      <mat-header-row *matHeaderRowDef="displayedColumns2"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns2;">
+      </mat-row>
+    </mat-table>
+  
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    </cdk-virtual-scroll-viewport>
+  </div>
+
+</div>

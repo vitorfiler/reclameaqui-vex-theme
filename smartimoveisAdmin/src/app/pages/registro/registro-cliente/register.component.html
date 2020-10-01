@@ -1,0 +1,99 @@
+<div style="padding-top: 1%;padding-bottom: 1%;" class="w-full h-full bg-pattern" fxLayout="column" fxLayoutAlign="center center">
+  <div @fadeInUp class="card overflow-hidden w-full max-w-xs">
+    <cdk-virtual-scroll-viewport [itemSize]="18 * 7" class="example-viewport">
+
+    <div class="p-6 pb-0" fxLayout="column" fxLayoutAlign="center center">
+      <div class="fill-current text-center">
+        <img class="w-16" src="assets/img/demo/logo.svg">
+      </div>
+    </div>
+
+    <div class="text-center mt-4">
+      <h2 class="title m-0">Cadastro de Admin do sistema</h2>
+      <h4 class="body-2 text-secondary m-0">Preencha o formulário abaixo</h4>
+      <p class="text-secondary text-center">Ou <a style="color: red;" href="/usuarios">Visualize</a> usuários existentes</p>
+    </div>
+
+    <form [formGroup]="form" class="p-6" fxLayout="column" fxLayoutGap="16px">
+      <div fxFlex="auto" fxLayout="column">
+        <mat-form-field fxFlex="grow" appearance="outline">
+          <mat-label>Nome</mat-label>
+          <input formControlName="nome" matInput maxlength="50" required>
+        </mat-form-field>
+
+        <mat-form-field fxFlex="grow" appearance="outline">
+          <mat-label>Usuário</mat-label>
+          <input formControlName="usuario" matInput required mask="A*" maxlength="20">
+        </mat-form-field>
+
+        <mat-form-field fxFlex="grow" appearance="outline">
+          <mat-label>celular</mat-label>
+          <input formControlName="celular" matInput mask="(00) 0*" required>
+        </mat-form-field>
+
+        <mat-form-field fxFlex="grow" appearance="outline">
+          <mat-label>Email</mat-label>
+          <input formControlName="email" matInput required>
+        </mat-form-field>
+
+        <mat-form-field fxFlex="grow" appearance="outline">
+          <mat-label>Facebook</mat-label>
+          <input formControlName="facebook" mask="A*" matInput>
+        </mat-form-field>
+
+        <mat-form-field fxFlex="grow" appearance="outline">
+          <mat-label>Twitter</mat-label>
+          <input formControlName="twitter" mask="A*" matInput>
+        </mat-form-field>
+
+        <mat-form-field fxFlex="grow" appearance="outline">
+          <mat-label>Linkedin</mat-label>
+          <input formControlName="linkedin" mask="A*" matInput>
+        </mat-form-field>
+
+        <mat-form-field fxFlex="grow" appearance="outline">
+          <mat-label>Instagram</mat-label>
+          <input formControlName="instagram" mask="A*" matInput>
+        </mat-form-field>
+
+        <mat-form-field fxFlex="grow" appearance="outline">
+          <mat-label>Apresentacao</mat-label>
+          <input formControlName="apresentacao" matInput>
+        </mat-form-field>
+
+        <mat-form-field fxFlex="grow" appearance="outline">
+          <mat-label>Senha</mat-label>
+          <input [type]="inputType" formControlName="senha" matInput required>
+          <button (click)="toggleVisibility()" mat-icon-button matSuffix matTooltip="Toggle Visibility" type="button">
+            <mat-icon *ngIf="visible" [icIcon]="icVisibility"></mat-icon>
+            <mat-icon *ngIf="!visible" [icIcon]="icVisibilityOff"></mat-icon>
+          </button>
+          <mat-hint>Clique no olho para alternar a visibilidade</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field fxFlex="grow" appearance="outline">
+          <mat-label>Confirmar Senha</mat-label>
+          <input [type]="inputType" formControlName="confirmaSenha" matInput required>
+          <button (click)="toggleVisibility()" mat-icon-button matSuffix matTooltip="Toggle Visibility" type="button">
+            <mat-icon *ngIf="visible" [icIcon]="icVisibility"></mat-icon>
+            <mat-icon *ngIf="!visible" [icIcon]="icVisibilityOff"></mat-icon>
+          </button>
+          <mat-hint>Repita sua senha acima</mat-hint>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <mat-checkbox formControlName="termos" class="caption" required>Aceito os <a><u>termos e condições.</u></a></mat-checkbox>
+      </div>
+      <button [disabled]="form.invalid" (click)="registrar()" color="primary" mat-raised-button type="button">
+        {{register}}
+      </button>
+      <button (click)="cancelar()" type="reset" color="warn" mat-raised-button type="button">Cancelar</button>
+      <p class="text-secondary text-center">
+        Deseja entrar ou, trocar de conta?<br/>
+        <a (click)="logout()">Clique aqui</a>
+      </p>
+    </form>
+  </cdk-virtual-scroll-viewport>
+  </div>
+</div>

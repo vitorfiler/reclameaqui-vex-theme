@@ -1,0 +1,30 @@
+.example-header {
+    min-height: 64px;
+    // padding: 8px 24px 0;
+  }
+  mat-header-cell {
+    display:flex;
+    justify-content:center;
+   }
+  .rows{
+    display:flex;
+    justify-content:center;
+  }
+  .add{
+    display:flex;
+    justify-content:flex-end;
+    // margin-right: 5%;
+    margin-bottom: 1%;
+    margin-top: 1%;
+  }
+  
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  } 
+  
+  .mat-table {
+    overflow: auto;
+    max-height: 300px;
+  }
+  
